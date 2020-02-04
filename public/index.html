@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ToDo</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="js/xhr.js"></script>
+  </head>
+  <body>
+    <div class="topHeader">
+      <div id="newTitleAddButton" onclick="location.href='newToDoPage.html'">
+        <img src="images/addButton.png" alt="" />
+      </div>
+      <div class="topHeading">TODO</div>
+    </div>
+    <div class="pageContainer">
+      <div class="leftContainer">
+        <div class="newToDoArea">
+          <input
+            type="text"
+            name="title"
+            value="add title"
+            id="titleInnerText"
+          />
+          <input
+            type="button"
+            name="add"
+            value="Add"
+            onclick="sendRequest()"
+          />
+        </div>
+      </div>
+      <div class="rightContainer">
+        <div class="titles"></div>
+      </div>
+    </div>
+  </body>
+</html>
