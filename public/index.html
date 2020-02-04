@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="topHeader">
-      <div id="newTitleAddButton" onclick="location.href='newToDoPage.html'">
+      <div id="newTitleAddButton">
         <img src="images/addButton.png" alt="" />
       </div>
       <div class="topHeading">TODO</div>
@@ -24,17 +24,10 @@
             value="add title"
             id="titleInnerText"
           />
-          <input
-            type="button"
-            name="add"
-            value="Add"
-            onclick="sendRequest()"
-          />
+          <input type="button" name="add" value="Add" onclick="saveTitle()" />
         </div>
       </div>
-      <div class="rightContainer">
-        <div class="titles"></div>
-      </div>
+      <div class="rightContainer"></div>
     </div>
   </body>
 </html>

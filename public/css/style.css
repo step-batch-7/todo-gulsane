@@ -37,18 +37,29 @@ body {
 
 .rightContainer {
   border: solid black 1px;
-  height: 80vh;
-  width: 80vw;
-}
-
-.toDoList {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow: scroll;
+  height: 70vh;
+  width: 80vw;
+  padding: 5vh;
 }
 
 .title {
-  border: solid black 1px;
+  border: 1px solid black;
   height: 30vh;
   width: 30vh;
   margin: 4vh;
+}
+
+h2 {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.header {
+  font-size: 25px;
+  display: flex;
+  justify-content: centre;
 }
