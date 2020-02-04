@@ -26,5 +26,5 @@ Data Structure To Store The ToDo list --
 version[1]
 
 --DONE-- * Add dev dependencies
-*
-* Add a page which shows the TODO list with title
+--DONE-- * Add a page which shows the TODO list with title
+* Show all the title which are in the data while refreshing the page

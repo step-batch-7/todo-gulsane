@@ -9,6 +9,21 @@ const addTitleCard = function(title) {
   return div;
 };
 
+const loadAllToDo = function() {
+  const req = new XMLHttpRequest();
+  req.open('GET', '/toDoList');
+  req.onload = function() {
+    if (req.status === 200) {
+      const rightContainer = document.querySelector('.rightContainer');
+      const toDoList = JSON.parse(req.responseText);
+      toDoList.forEach(element => {
+        rightContainer.appendChild(addTitleCard(element.value));
+      });
+    }
+  };
+  req.send();
+};
+
 const saveTitle = function() {
   const req = new XMLHttpRequest();
   req.open('POST', '/saveTitle');
