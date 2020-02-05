@@ -76,4 +76,5 @@ const appendTask = function() {
   const formBody = document.querySelector('.formBody');
   const task = document.querySelector('#task').value;
   formBody.append(createTask(task));
+  formBody.scrollTop = formBody.scrollHeight;
 };
