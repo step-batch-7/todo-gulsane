@@ -30,5 +30,5 @@ version[1]
 --DONE-- * Show all the title which are in the data while refreshing the page
 --DONE-- * Add id the the title
 --DONE-- * Add delete icon to header of card
-* Add title id to the card
+--DONE-- * Add title id to the card
 * Add delete option to the title

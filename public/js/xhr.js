@@ -2,6 +2,7 @@ const createDustbin = function() {
   const dustbin = document.createElement('img');
   dustbin.className = 'dustbin';
   dustbin.setAttribute('src', 'images/delete.png');
+  dustbin.onclick = deleteTitle;
   return dustbin;
 };
 
@@ -52,4 +53,9 @@ const saveTitle = function() {
   };
   const value = document.getElementById('titleInnerText').value;
   req.send(JSON.stringify({ value }));
+};
+
+const deleteTitle = function() {
+  const titleCard = event.target.parentElement.parentElement;
+  titleCard.remove();
 };
