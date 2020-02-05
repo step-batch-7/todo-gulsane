@@ -31,4 +31,5 @@ version[1]
 --DONE-- * Add id the the title
 --DONE-- * Add delete icon to header of card
 --DONE-- * Add title id to the card
-* Add delete option to the title
+--DONE-- * Add delete option to the title
+* Add tasks to the titles

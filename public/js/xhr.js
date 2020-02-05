@@ -57,5 +57,10 @@ const saveTitle = function() {
 
 const deleteTitle = function() {
   const titleCard = event.target.parentElement.parentElement;
-  titleCard.remove();
+  const req = new XMLHttpRequest();
+  req.open('POST', 'deleteTitle');
+  req.onload = function() {
+    titleCard.remove();
+  };
+  req.send(JSON.stringify({ id: titleCard.id }));
 };
