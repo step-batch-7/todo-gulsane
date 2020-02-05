@@ -16,9 +16,10 @@ const createHeader = function(title) {
   return cardHeader;
 };
 
-const addTitleCard = function(title) {
+const addTitleCard = function(title, id) {
   const cardLayout = document.createElement('div');
   cardLayout.className = 'cardLayout';
+  cardLayout.id = id;
   cardLayout.appendChild(createHeader(title));
   return cardLayout;
 };
@@ -31,7 +32,7 @@ const loadAllToDo = function() {
       const rightContainer = document.querySelector('.rightContainer');
       const toDoList = JSON.parse(req.responseText);
       toDoList.forEach(element => {
-        rightContainer.appendChild(addTitleCard(element.value));
+        rightContainer.appendChild(addTitleCard(element.value, element.id));
       });
     }
   };
@@ -45,8 +46,8 @@ const saveTitle = function() {
   req.onload = function() {
     if (req.status === 201) {
       const rightContainer = document.querySelector('.rightContainer');
-      const title = JSON.parse(req.responseText).value;
-      rightContainer.appendChild(addTitleCard(title));
+      const title = JSON.parse(req.responseText);
+      rightContainer.appendChild(addTitleCard(title.value, title.id));
     }
   };
   const value = document.getElementById('titleInnerText').value;
