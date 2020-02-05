@@ -96,3 +96,15 @@ body {
 .formFooter {
   flex: 10%;
 }
+
+.taskArea {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskRemoverIcon {
+  height: 16px;
+  width: 16px;
+  margin-right: 15px;
+  align-self: center;
+}

@@ -63,12 +63,27 @@ const makeRequest = function(data, method, url, callBack) {
   request.send(JSON.stringify(data));
 };
 
+const removeTask = function() {
+  const taskArea = event.target.parentElement;
+  taskArea.remove();
+};
+
+const createTaskRemoverIcon = function() {
+  const icon = document.createElement('img');
+  icon.className = 'taskRemoverIcon';
+  icon.setAttribute('src', 'images/delete.png');
+  icon.onclick = removeTask;
+  return icon;
+};
+
 const createTask = function(task) {
   const taskArea = document.createElement('div');
   taskArea.className = 'taskArea';
   const paragraph = document.createElement('p');
+  paragraph.className = 'taskTitle';
   paragraph.innerText = task;
   taskArea.appendChild(paragraph);
+  taskArea.appendChild(createTaskRemoverIcon());
   return taskArea;
 };
 
