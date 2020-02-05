@@ -62,3 +62,18 @@ const makeRequest = function(data, method, url, callBack) {
   request.onload = callBack;
   request.send(JSON.stringify(data));
 };
+
+const createTask = function(task) {
+  const taskArea = document.createElement('div');
+  taskArea.className = 'taskArea';
+  const paragraph = document.createElement('p');
+  paragraph.innerText = task;
+  taskArea.appendChild(paragraph);
+  return taskArea;
+};
+
+const appendTask = function() {
+  const formBody = document.querySelector('.formBody');
+  const task = document.querySelector('#task').value;
+  formBody.append(createTask(task));
+};

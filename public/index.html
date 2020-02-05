@@ -17,14 +17,17 @@
     </div>
     <div class="pageContainer">
       <div class="leftContainer">
-        <div class="newToDoArea">
-          <input
-            type="text"
-            name="title"
-            value="add title"
-            id="titleInnerText"
-          />
-          <input type="button" name="add" value="Add" onclick="saveTitle()" />
+        <div class="toDoForm">
+          <div class="formHeader">
+            <input type="text" placeholder="Add Title..." />
+          </div>
+          <div class="formBody"></div>
+          <div class="formFooter">
+            <input type="text" placeholder="Add Task..." id="task" />
+            <button onclick="appendTask()" id="taskAdder">Add Task</button>
+            <button id="formSubmitter">Submit</button>
+            <button id="formCanceler">Cancel</button>
+          </div>
         </div>
       </div>
       <div class="rightContainer"></div>

@@ -72,4 +72,27 @@ body {
   height: 20px;
   width: 20px;
   margin: 12px;
+  cursor: pointer;
+}
+
+.toDoForm {
+  height: 50vh;
+  width: 20vw;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.formHeader {
+  border-bottom: 1px solid black;
+  flex: 10%;
+}
+
+.formBody {
+  flex: 80%;
+  overflow-y: scroll;
+}
+
+.formFooter {
+  flex: 10%;
 }
