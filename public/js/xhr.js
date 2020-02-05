@@ -26,41 +26,39 @@ const addTitleCard = function(title, id) {
 };
 
 const loadAllToDo = function() {
-  const req = new XMLHttpRequest();
-  req.open('GET', '/toDoList');
-  req.onload = function() {
-    if (req.status === 200) {
+  makeRequest({}, 'GET', '/toDoList', function() {
+    if (this.status === 200) {
       const rightContainer = document.querySelector('.rightContainer');
-      const toDoList = JSON.parse(req.responseText);
+      const toDoList = JSON.parse(this.responseText);
       toDoList.forEach(element => {
         rightContainer.appendChild(addTitleCard(element.value, element.id));
       });
     }
-  };
-  req.send();
+  });
 };
 
 const saveTitle = function() {
-  const req = new XMLHttpRequest();
-  req.open('POST', '/saveTitle');
-  req.setRequestHeader('Content-Type', 'application/json');
-  req.onload = function() {
-    if (req.status === 201) {
+  const value = document.getElementById('titleInnerText').value;
+  makeRequest({ value }, 'POST', '/saveTitle', function() {
+    if (this.status === 201) {
       const rightContainer = document.querySelector('.rightContainer');
-      const title = JSON.parse(req.responseText);
+      const title = JSON.parse(this.responseText);
       rightContainer.appendChild(addTitleCard(title.value, title.id));
     }
-  };
-  const value = document.getElementById('titleInnerText').value;
-  req.send(JSON.stringify({ value }));
+  });
 };
 
 const deleteTitle = function() {
   const titleCard = event.target.parentElement.parentElement;
-  const req = new XMLHttpRequest();
-  req.open('POST', 'deleteTitle');
-  req.onload = function() {
+  const data = { id: titleCard.id };
+  makeRequest(data, 'POST', '/deleteTitle', function() {
     titleCard.remove();
-  };
-  req.send(JSON.stringify({ id: titleCard.id }));
+  });
+};
+
+const makeRequest = function(data, method, url, callBack) {
+  const request = new XMLHttpRequest();
+  request.open(method, url);
+  request.onload = callBack;
+  request.send(JSON.stringify(data));
 };
