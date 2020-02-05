@@ -1,12 +1,26 @@
+const createDustbin = function() {
+  const dustbin = document.createElement('img');
+  dustbin.className = 'dustbin';
+  dustbin.setAttribute('src', 'images/delete.png');
+  return dustbin;
+};
+
+const createHeader = function(title) {
+  const cardHeader = document.createElement('div');
+  cardHeader.className = 'cardHeader';
+  const headTitle = document.createElement('h3');
+  headTitle.className = 'headTitle';
+  headTitle.innerText = title;
+  cardHeader.appendChild(headTitle);
+  cardHeader.appendChild(createDustbin());
+  return cardHeader;
+};
+
 const addTitleCard = function(title) {
-  const div = document.createElement('div');
-  div.className = 'title';
-  const h2 = document.createElement('h2');
-  h2.innerText = title;
-  div.appendChild(h2);
-  const hr = document.createElement('hr');
-  div.appendChild(hr);
-  return div;
+  const cardLayout = document.createElement('div');
+  cardLayout.className = 'cardLayout';
+  cardLayout.appendChild(createHeader(title));
+  return cardLayout;
 };
 
 const loadAllToDo = function() {

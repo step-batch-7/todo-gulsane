@@ -27,4 +27,8 @@ version[1]
 
 --DONE-- * Add dev dependencies
 --DONE-- * Add a page which shows the TODO list with title
-* Show all the title which are in the data while refreshing the page
+--DONE-- * Show all the title which are in the data while refreshing the page
+--DONE-- * Add id the the title
+--DONE-- * Add delete icon to header of card
+* Add title id to the card
+* Add delete option to the title
