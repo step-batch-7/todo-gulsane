@@ -41,9 +41,10 @@ const createTaskDeleteIcon = function() {
   return taskDeleteIcon;
 };
 
-const createTaskDiv = function(task) {
+const createTaskDiv = function(task, id) {
   const taskDiv = document.createElement('div');
   taskDiv.className = 'taskDiv';
+  taskDiv.id = id;
   taskDiv.appendChild(createCheckBox());
   taskDiv.appendChild(createTaskName(task));
   taskDiv.appendChild(createTaskDeleteIcon());
@@ -54,7 +55,7 @@ const createCardBody = function(tasks) {
   const cardBody = document.createElement('div');
   cardBody.className = 'cardBody';
   tasks.forEach(function(task) {
-    cardBody.appendChild(createTaskDiv(task.title));
+    cardBody.appendChild(createTaskDiv(task.title, task.id));
   });
   return cardBody;
 };
@@ -100,7 +101,11 @@ const deleteToDo = function() {
 
 const deleteTask = function() {
   const taskDiv = event.target.parentElement.parentElement;
-  taskDiv.remove();
+  const taskId = taskDiv.id;
+  const toDoId = taskDiv.parentElement.parentElement.id;
+  makeRequest({ toDoId, taskId }, 'POST', '/deleteTask', function() {
+    taskDiv.remove();
+  });
 };
 
 const makeRequest = function(data, method, url, callBack) {
