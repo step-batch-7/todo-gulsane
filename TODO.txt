@@ -5,8 +5,8 @@ Data Structure To Store The ToDo list --
         value: 'travel',
         id: 'title1',
         completed: false,
-        itemCount:0,
-        items: [
+        taskCount:0,
+        tasks: [
                 { id: 'item1', value: 'buy clothes', hasDone: false },
                 { id: 'item2', value: 'withdraw cash', hasDone: false }
                ]
@@ -15,8 +15,8 @@ Data Structure To Store The ToDo list --
         title: 'study',
         id: 'title2',
         completed: false,
-        itemCount:0,
-        items: [
+        taskCount:0,
+        tasks: [
                  { id: 'item1', value: 'read books', hasDone: false },
                  { id: 'item2', value: 'solve mathematics', hasDone: false }
     ]
@@ -35,4 +35,4 @@ version[1]
 --DONE-- * Add delete option to the title
 --DONE-- * Add todo form
 --DONE-- * Change the data structure of the database 
-* Add tasks to the titles
+--DONE-- * Add tasks to the titles

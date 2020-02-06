@@ -2,11 +2,11 @@ const createDustbin = function() {
   const dustbin = document.createElement('img');
   dustbin.className = 'dustbin';
   dustbin.setAttribute('src', 'images/delete.png');
-  dustbin.onclick = deleteTitle;
+  dustbin.onclick = deleteToDo;
   return dustbin;
 };
 
-const createHeader = function(title) {
+const createCardHeader = function(title) {
   const cardHeader = document.createElement('div');
   cardHeader.className = 'cardHeader';
   const headTitle = document.createElement('h3');
@@ -17,11 +17,54 @@ const createHeader = function(title) {
   return cardHeader;
 };
 
-const addTitleCard = function(title, id) {
+const createCheckBox = function() {
+  const checkBox = document.createElement('input');
+  checkBox.className = 'checkBox';
+  checkBox.setAttribute('type', 'checkbox');
+  return checkBox;
+};
+
+const createTaskName = function(task) {
+  const taskName = document.createElement('div');
+  taskName.className = 'taskName';
+  taskName.innerText = task;
+  return taskName;
+};
+
+const createTaskDeleteIcon = function() {
+  const taskDeleteIcon = document.createElement('div');
+  taskDeleteIcon.className = 'taskDeleteIcon';
+  taskDeleteIcon.onclick = deleteTask;
+  const icon = document.createElement('img');
+  icon.setAttribute('src', 'images/delete.png');
+  taskDeleteIcon.appendChild(icon);
+  return taskDeleteIcon;
+};
+
+const createTaskDiv = function(task) {
+  const taskDiv = document.createElement('div');
+  taskDiv.className = 'taskDiv';
+  taskDiv.appendChild(createCheckBox());
+  taskDiv.appendChild(createTaskName(task));
+  taskDiv.appendChild(createTaskDeleteIcon());
+  return taskDiv;
+};
+
+const createCardBody = function(tasks) {
+  const cardBody = document.createElement('div');
+  cardBody.className = 'cardBody';
+  tasks.forEach(function(task) {
+    cardBody.appendChild(createTaskDiv(task.title));
+  });
+  return cardBody;
+};
+
+const addToDoCard = function(respondedTodo) {
   const cardLayout = document.createElement('div');
   cardLayout.className = 'cardLayout';
-  cardLayout.id = id;
-  cardLayout.appendChild(createHeader(title));
+  cardLayout.id = respondedTodo.id;
+  cardLayout.appendChild(createCardHeader(respondedTodo.title));
+  cardLayout.appendChild(createCardBody(respondedTodo.tasks));
   return cardLayout;
 };
 
@@ -31,29 +74,31 @@ const loadAllToDo = function() {
       const rightContainer = document.querySelector('.rightContainer');
       const toDoList = JSON.parse(this.responseText);
       toDoList.forEach(element => {
-        rightContainer.appendChild(addTitleCard(element.value, element.id));
+        rightContainer.appendChild(addToDoCard(element));
       });
     }
   });
 };
 
-const saveTitle = function(title) {
-  makeRequest({ value: title }, 'POST', '/saveTitle', function() {
+const saveTitle = function(toDoContent) {
+  makeRequest(toDoContent, 'POST', '/saveToDo', function() {
     if (this.status === 201) {
       const rightContainer = document.querySelector('.rightContainer');
-      const title = JSON.parse(this.responseText);
-      rightContainer.appendChild(addTitleCard(title.value, title.id));
+      const respondedToDo = JSON.parse(this.responseText);
+      rightContainer.appendChild(addToDoCard(respondedToDo));
     }
   });
 };
 
-const deleteTitle = function() {
+const deleteToDo = function() {
   const titleCard = event.target.parentElement.parentElement;
   const data = { id: titleCard.id };
-  makeRequest(data, 'POST', '/deleteTitle', function() {
+  makeRequest(data, 'POST', '/deleteToDo', function() {
     titleCard.remove();
   });
 };
+
+const deleteTask = function() {};
 
 const makeRequest = function(data, method, url, callBack) {
   const request = new XMLHttpRequest();
@@ -104,5 +149,5 @@ const extractToDoContent = function() {
 
 const submitToDo = function() {
   const toDoContent = extractToDoContent();
-  return toDoContent;
+  saveTitle(toDoContent);
 };
