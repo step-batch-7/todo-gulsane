@@ -36,3 +36,5 @@ version[1]
 --DONE-- * Add todo form
 --DONE-- * Change the data structure of the database 
 --DONE-- * Add tasks to the titles
+* Make deleteTaskIcon operational of todo card
+* Make checkBox operational of todo card

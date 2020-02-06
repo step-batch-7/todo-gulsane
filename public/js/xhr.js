@@ -91,14 +91,17 @@ const saveTitle = function(toDoContent) {
 };
 
 const deleteToDo = function() {
-  const titleCard = event.target.parentElement.parentElement;
-  const data = { id: titleCard.id };
+  const toDoCard = event.target.parentElement.parentElement;
+  const data = { id: toDoCard.id };
   makeRequest(data, 'POST', '/deleteToDo', function() {
-    titleCard.remove();
+    toDoCard.remove();
   });
 };
 
-const deleteTask = function() {};
+const deleteTask = function() {
+  const taskDiv = event.target.parentElement.parentElement;
+  taskDiv.remove();
+};
 
 const makeRequest = function(data, method, url, callBack) {
   const request = new XMLHttpRequest();
