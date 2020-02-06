@@ -1,23 +1,24 @@
 Data Structure To Store The ToDo list --
-   [
-  {
-    title: 'travel',
-    id: 'title1',
-    date: new Date(),
-    completed: false,
-    items: [
-      { id: 'item1', value: 'buy clothes', hasDone: false },
-      { id: 'item2', value: 'withdraw cash', hasDone: false }
-    ]
-  },
-  {
-    title: 'study',
-    id: 'title2',
-    date: new Date(),
-    completed: false,
-    items: [
-      { id: 'item1', value: 'read books', hasDone: false },
-      { id: 'item2', value: 'solve mathematics', hasDone: false }
+   {titleCount:0,
+    titles:[
+      {
+        value: 'travel',
+        id: 'title1',
+        completed: false,
+        itemCount:0,
+        items: [
+                { id: 'item1', value: 'buy clothes', hasDone: false },
+                { id: 'item2', value: 'withdraw cash', hasDone: false }
+               ]
+      },
+      {
+        title: 'study',
+        id: 'title2',
+        completed: false,
+        itemCount:0,
+        items: [
+                 { id: 'item1', value: 'read books', hasDone: false },
+                 { id: 'item2', value: 'solve mathematics', hasDone: false }
     ]
   }
 ];
@@ -33,4 +34,5 @@ version[1]
 --DONE-- * Add title id to the card
 --DONE-- * Add delete option to the title
 --DONE-- * Add todo form
+--DONE-- * Change the data structure of the database 
 * Add tasks to the titles

@@ -37,9 +37,8 @@ const loadAllToDo = function() {
   });
 };
 
-const saveTitle = function() {
-  const value = document.getElementById('titleInnerText').value;
-  makeRequest({ value }, 'POST', '/saveTitle', function() {
+const saveTitle = function(title) {
+  makeRequest({ value: title }, 'POST', '/saveTitle', function() {
     if (this.status === 201) {
       const rightContainer = document.querySelector('.rightContainer');
       const title = JSON.parse(this.responseText);
@@ -97,8 +96,9 @@ const appendTask = function() {
 const extractToDoContent = function() {
   const title = document.querySelector('#F_title').value;
   const tasksElements = document.querySelectorAll('.F_tasks');
-  const tasks = [];
-  tasksElements.forEach(task => tasks.push(task.innerText));
+  const tasks = Array.from(tasksElements).map(task => {
+    return task.innerText;
+  });
   return { title, tasks };
 };
 
