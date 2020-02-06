@@ -19,13 +19,13 @@
       <div class="leftContainer">
         <div class="toDoForm">
           <div class="formHeader">
-            <input type="text" placeholder="Add Title..." />
+            <input type="text" placeholder="Add Title..." id="F_title" />
           </div>
           <div class="formBody"></div>
           <div class="formFooter">
-            <input type="text" placeholder="Add Task..." id="task" />
+            <input type="text" placeholder="Add Task..." id="F_inputTask" />
             <button onclick="appendTask()" id="taskAdder">Add Task</button>
-            <button id="formSubmitter">Submit</button>
+            <button id="formSubmitter" onclick="submitToDo()">Submit</button>
             <button id="formCanceler">Cancel</button>
           </div>
         </div>

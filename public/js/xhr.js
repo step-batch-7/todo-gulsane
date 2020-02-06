@@ -80,7 +80,7 @@ const createTask = function(task) {
   const taskArea = document.createElement('div');
   taskArea.className = 'taskArea';
   const paragraph = document.createElement('p');
-  paragraph.className = 'taskTitle';
+  paragraph.className = 'F_tasks';
   paragraph.innerText = task;
   taskArea.appendChild(paragraph);
   taskArea.appendChild(createTaskRemoverIcon());
@@ -89,7 +89,20 @@ const createTask = function(task) {
 
 const appendTask = function() {
   const formBody = document.querySelector('.formBody');
-  const task = document.querySelector('#task').value;
+  const task = document.querySelector('#F_inputTask').value;
   formBody.append(createTask(task));
   formBody.scrollTop = formBody.scrollHeight;
+};
+
+const extractToDoContent = function() {
+  const title = document.querySelector('#F_title').value;
+  const tasksElements = document.querySelectorAll('.F_tasks');
+  const tasks = [];
+  tasksElements.forEach(task => tasks.push(task.innerText));
+  return { title, tasks };
+};
+
+const submitToDo = function() {
+  const toDoContent = extractToDoContent();
+  return toDoContent;
 };
