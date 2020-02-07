@@ -126,14 +126,18 @@ body {
   border: 1px solid black;
 }
 .checkBox {
-  flex: 10%;
+  margin-left: 1vw;
+  margin-right: 1vw;
   align-self: center;
+  cursor: pointer;
 }
 .taskName {
   flex: 80%;
   align-self: center;
 }
 .taskDeleteIcon {
-  flex: 10%;
+  margin-left: 1vw;
+  margin-right: 1vw;
   align-self: center;
+  cursor: pointer;
 }
