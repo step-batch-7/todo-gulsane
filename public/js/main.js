@@ -70,7 +70,7 @@ const addToDoCard = function(respondedTodo) {
 };
 
 const loadAllToDo = function() {
-  makeRequest({}, 'GET', '/toDoList', function() {
+  request('GET', '/toDoList', {}, function() {
     if (this.status === 200) {
       const rightContainer = document.querySelector('.rightContainer');
       const toDoList = JSON.parse(this.responseText);
@@ -82,7 +82,7 @@ const loadAllToDo = function() {
 };
 
 const saveTitle = function(toDoContent) {
-  makeRequest(toDoContent, 'POST', '/saveToDo', function() {
+  request('POST', '/saveToDo', toDoContent, function() {
     if (this.status === 201) {
       const rightContainer = document.querySelector('.rightContainer');
       const respondedToDo = JSON.parse(this.responseText);
@@ -94,7 +94,7 @@ const saveTitle = function(toDoContent) {
 const deleteToDo = function() {
   const toDoCard = event.target.parentElement.parentElement;
   const data = { id: toDoCard.id };
-  makeRequest(data, 'POST', '/deleteToDo', function() {
+  request('POST', '/deleteToDo', data, function() {
     toDoCard.remove();
   });
 };
@@ -103,16 +103,16 @@ const deleteTask = function() {
   const taskDiv = event.target.parentElement.parentElement;
   const taskId = taskDiv.id;
   const toDoId = taskDiv.parentElement.parentElement.id;
-  makeRequest({ toDoId, taskId }, 'POST', '/deleteTask', function() {
+  request('POST', '/deleteTask', { toDoId, taskId }, function() {
     taskDiv.remove();
   });
 };
 
-const makeRequest = function(data, method, url, callBack) {
-  const request = new XMLHttpRequest();
-  request.open(method, url);
-  request.onload = callBack;
-  request.send(JSON.stringify(data));
+const request = function(method, url, data, callBack) {
+  const xhr = new XMLHttpRequest();
+  xhr.open(method, url);
+  xhr.onload = callBack;
+  xhr.send(JSON.stringify(data));
 };
 
 const removeTask = function() {

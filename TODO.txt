@@ -4,7 +4,7 @@ Data Structure To Store The ToDo list --
       {
         value: 'travel',
         id: 'title1',
-        completed: false,
+        hasDone: false,
         taskCount:0,
         tasks: [
                 { id: 'item1', value: 'buy clothes', hasDone: false },
@@ -14,14 +14,15 @@ Data Structure To Store The ToDo list --
       {
         title: 'study',
         id: 'title2',
-        completed: false,
+        hasDone: false,
         taskCount:0,
         tasks: [
                  { id: 'item1', value: 'read books', hasDone: false },
                  { id: 'item2', value: 'solve mathematics', hasDone: false }
+                ]
+      }
     ]
-  }
-];
+};
 
 
 version[1]
@@ -37,4 +38,6 @@ version[1]
 --DONE-- * Change the data structure of the database 
 --DONE-- * Add tasks to the titles
 --DONE-- * Make deleteTaskIcon operational of todo card
+* Make ToDoList class
+* Make ToDo class
 * Make checkBox operational of todo card
