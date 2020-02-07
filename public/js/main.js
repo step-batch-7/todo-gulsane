@@ -72,8 +72,8 @@ const addToDoCard = function(respondedTodo) {
 const loadAllToDo = function() {
   requestGet('/toDoList', function() {
     if (this.status === 200) {
-      const rightContainer = document.querySelector('.rightContainer');
       const toDoList = JSON.parse(this.responseText);
+      const rightContainer = document.querySelector('.rightContainer');
       toDoList.forEach(element => {
         rightContainer.appendChild(addToDoCard(element));
       });
@@ -81,7 +81,17 @@ const loadAllToDo = function() {
   });
 };
 
-const saveTitle = function(toDoContent) {
+const extractToDoContent = function() {
+  const title = document.querySelector('#F_title').value;
+  const tasksElements = document.querySelectorAll('.F_tasks');
+  const tasks = Array.from(tasksElements).map(task => {
+    return task.innerText;
+  });
+  return { title, tasks };
+};
+
+const saveToDo = function() {
+  const toDoContent = extractToDoContent();
   requestPost('/saveToDo', toDoContent, function() {
     if (this.status === 201) {
       const rightContainer = document.querySelector('.rightContainer');
@@ -148,20 +158,6 @@ const appendTask = function() {
   const task = document.querySelector('#F_inputTask').value;
   formBody.append(createTask(task));
   formBody.scrollTop = formBody.scrollHeight;
-};
-
-const extractToDoContent = function() {
-  const title = document.querySelector('#F_title').value;
-  const tasksElements = document.querySelectorAll('.F_tasks');
-  const tasks = Array.from(tasksElements).map(task => {
-    return task.innerText;
-  });
-  return { title, tasks };
-};
-
-const submitToDo = function() {
-  const toDoContent = extractToDoContent();
-  saveTitle(toDoContent);
 };
 
 const main = () => {
