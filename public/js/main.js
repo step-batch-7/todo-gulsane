@@ -93,7 +93,7 @@ const extractToDoContent = function() {
 const saveToDo = function() {
   const toDoContent = extractToDoContent();
   requestPost('/saveToDo', toDoContent, function() {
-    if (this.status === 201) {
+    if (this.status === 200) {
       const rightContainer = document.querySelector('.rightContainer');
       const respondedToDo = JSON.parse(this.responseText);
       rightContainer.appendChild(addToDoCard(respondedToDo));
