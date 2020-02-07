@@ -159,3 +159,8 @@ const submitToDo = function() {
   const toDoContent = extractToDoContent();
   saveTitle(toDoContent);
 };
+
+const main = () => {
+  loadAllToDo();
+};
+window.onload = main;
