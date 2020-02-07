@@ -70,7 +70,7 @@ const addToDoCard = function(respondedTodo) {
 };
 
 const loadAllToDo = function() {
-  request('GET', '/toDoList', {}, function() {
+  requestGet('/toDoList', function() {
     if (this.status === 200) {
       const rightContainer = document.querySelector('.rightContainer');
       const toDoList = JSON.parse(this.responseText);
@@ -82,7 +82,7 @@ const loadAllToDo = function() {
 };
 
 const saveTitle = function(toDoContent) {
-  request('POST', '/saveToDo', toDoContent, function() {
+  requestPost('/saveToDo', toDoContent, function() {
     if (this.status === 201) {
       const rightContainer = document.querySelector('.rightContainer');
       const respondedToDo = JSON.parse(this.responseText);
@@ -94,7 +94,7 @@ const saveTitle = function(toDoContent) {
 const deleteToDo = function() {
   const toDoCard = event.target.parentElement.parentElement;
   const data = { id: toDoCard.id };
-  request('POST', '/deleteToDo', data, function() {
+  requestPost('/deleteToDo', data, function() {
     toDoCard.remove();
   });
 };
@@ -103,7 +103,7 @@ const deleteTask = function() {
   const taskDiv = event.target.parentElement.parentElement;
   const taskId = taskDiv.id;
   const toDoId = taskDiv.parentElement.parentElement.id;
-  request('POST', '/deleteTask', { toDoId, taskId }, function() {
+  requestPost('/deleteTask', { toDoId, taskId }, function() {
     taskDiv.remove();
   });
 };
@@ -114,6 +114,10 @@ const request = function(method, url, data, callBack) {
   xhr.onload = callBack;
   xhr.send(JSON.stringify(data));
 };
+
+const requestGet = (url, callBack) => request('GET', url, {}, callBack);
+const requestPost = (url, data, callBack) =>
+  request('POST', url, data, callBack);
 
 const removeTask = function() {
   const taskArea = event.target.parentElement;
