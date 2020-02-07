@@ -18,10 +18,13 @@ const createCardHeader = function(title) {
 };
 
 const createCheckBox = function() {
+  const div = document.createElement('div');
   const checkBox = document.createElement('input');
   checkBox.className = 'checkBox';
   checkBox.setAttribute('type', 'checkbox');
-  return checkBox;
+  checkBox.onclick = toggleTaskStatus;
+  div.appendChild(checkBox);
+  return div;
 };
 
 const createTaskName = function(task) {
@@ -115,6 +118,16 @@ const deleteTask = function() {
   const toDoId = taskDiv.parentElement.parentElement.id;
   requestPost('/deleteTask', { toDoId, taskId }, function() {
     taskDiv.remove();
+  });
+};
+
+const toggleTaskStatus = function() {
+  const checkBox = event.target;
+  const taskDiv = event.target.parentElement.parentElement;
+  const taskId = taskDiv.id;
+  const toDoId = taskDiv.parentElement.parentElement.id;
+  requestPost('/toggleTaskStatus', { toDoId, taskId }, function() {
+    checkBox.setAttribute('checked', true);
   });
 };
 
