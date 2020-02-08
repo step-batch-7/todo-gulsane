@@ -45,12 +45,12 @@ const createTaskDeleteIcon = function() {
   return taskDeleteIcon;
 };
 
-const createTaskDiv = function(task, id, status) {
+const createTaskDiv = function(id, title, status) {
   const taskDiv = document.createElement('div');
   taskDiv.className = 'taskDiv';
   taskDiv.id = id;
   taskDiv.appendChild(createCheckBox(status));
-  taskDiv.appendChild(createTaskName(task));
+  taskDiv.appendChild(createTaskName(title));
   taskDiv.appendChild(createTaskDeleteIcon());
   return taskDiv;
 };
@@ -59,7 +59,7 @@ const createCardBody = function(tasks) {
   const cardBody = document.createElement('div');
   cardBody.className = 'cardBody';
   tasks.forEach(function(task) {
-    cardBody.appendChild(createTaskDiv(task.title, task.id, task.hasDone));
+    cardBody.appendChild(createTaskDiv(task.id, task.title, task.hasDone));
   });
   return cardBody;
 };
@@ -148,7 +148,12 @@ const addNewTask = function() {
   if (event.key === 'Enter') {
     const title = event.srcElement.value;
     const toDo = event.srcElement.parentElement.parentElement;
-    requestPost('/addNewTask', { toDoId: toDo.id, title }, function() {});
+    requestPost('/addNewTask', { toDoId: toDo.id, title }, function() {
+      const { id, title, hasDone } = JSON.parse(this.responseText).task;
+      const cardBody = toDo.querySelector('.cardBody');
+      cardBody.appendChild(createTaskDiv(id, title, hasDone));
+      cardBody.scrollTop = cardBody.scrollHeight;
+    });
   }
 };
 

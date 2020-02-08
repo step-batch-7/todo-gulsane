@@ -38,4 +38,5 @@ version[1]
 --DONE-- * Make ToDo class
 --DONE-- * Make checkBox operational of todo card
 --DONE-- * Add new task inside to a todo
-* Render the added task to the toDo card
+--DONE-- * Render the added task to the toDo card
+* Remove the value of inputTask inside card footer after each submission
