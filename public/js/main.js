@@ -20,7 +20,7 @@ const createCardHeader = function(title) {
 const createCheckBox = function() {
   const div = document.createElement('div');
   const checkBox = document.createElement('input');
-  checkBox.className = 'checkBox';
+  div.className = 'checkBox';
   checkBox.setAttribute('type', 'checkbox');
   checkBox.onclick = toggleTaskStatus;
   div.appendChild(checkBox);
