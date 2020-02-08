@@ -147,6 +147,7 @@ const toggleTaskStatus = function() {
 const addNewTask = function() {
   if (event.key === 'Enter') {
     const title = event.srcElement.value;
+    event.srcElement.value = '';
     const toDo = event.srcElement.parentElement.parentElement;
     requestPost('/addNewTask', { toDoId: toDo.id, title }, function() {
       const { id, title, hasDone } = JSON.parse(this.responseText).task;
