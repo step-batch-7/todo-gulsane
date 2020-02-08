@@ -17,11 +17,12 @@ const createCardHeader = function(title) {
   return cardHeader;
 };
 
-const createCheckBox = function() {
+const createCheckBox = function(status) {
   const div = document.createElement('div');
   const checkBox = document.createElement('input');
   div.className = 'checkBox';
   checkBox.setAttribute('type', 'checkbox');
+  checkBox.checked = status;
   checkBox.onclick = toggleTaskStatus;
   div.appendChild(checkBox);
   return div;
@@ -44,11 +45,11 @@ const createTaskDeleteIcon = function() {
   return taskDeleteIcon;
 };
 
-const createTaskDiv = function(task, id) {
+const createTaskDiv = function(task, id, status) {
   const taskDiv = document.createElement('div');
   taskDiv.className = 'taskDiv';
   taskDiv.id = id;
-  taskDiv.appendChild(createCheckBox());
+  taskDiv.appendChild(createCheckBox(status));
   taskDiv.appendChild(createTaskName(task));
   taskDiv.appendChild(createTaskDeleteIcon());
   return taskDiv;
@@ -58,7 +59,7 @@ const createCardBody = function(tasks) {
   const cardBody = document.createElement('div');
   cardBody.className = 'cardBody';
   tasks.forEach(function(task) {
-    cardBody.appendChild(createTaskDiv(task.title, task.id));
+    cardBody.appendChild(createTaskDiv(task.title, task.id, task.hasDone));
   });
   return cardBody;
 };
