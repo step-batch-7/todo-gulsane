@@ -34,6 +34,8 @@ version[1]
 --DONE-- * Change the data structure of the database 
 --DONE-- * Add tasks to the titles
 --DONE-- * Make deleteTaskIcon operational of todo card
-* Make ToDoList class
-* Make ToDo class
-* Make checkBox operational of todo card
+--DONE-- * Make ToDoList class
+--DONE-- * Make ToDo class
+--DONE-- * Make checkBox operational of todo card
+--DONE-- * Add new task inside to a todo
+* Render the added task to the toDo card

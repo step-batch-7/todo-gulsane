@@ -68,6 +68,8 @@ const createCardFooter = function() {
   const footer = document.createElement('div');
   footer.className = 'cardFooter';
   const input = document.createElement('input');
+  input.className = 'newTask';
+  input.onkeydown = addNewTask;
   footer.appendChild(input);
   return footer;
 };
@@ -140,6 +142,14 @@ const toggleTaskStatus = function() {
     const doneStatus = JSON.parse(this.responseText).status;
     checkBox.setAttribute('checked', doneStatus);
   });
+};
+
+const addNewTask = function() {
+  if (event.key === 'Enter') {
+    const title = event.srcElement.value;
+    const toDo = event.srcElement.parentElement.parentElement;
+    requestPost('/addNewTask', { toDoId: toDo.id, title }, function() {});
+  }
 };
 
 const request = function(method, url, data, callBack) {
