@@ -128,7 +128,8 @@ const toggleTaskStatus = function() {
   const taskId = taskDiv.id;
   const toDoId = taskDiv.parentElement.parentElement.id;
   requestPost('/toggleTaskStatus', { toDoId, taskId }, function() {
-    checkBox.setAttribute('checked', true);
+    const doneStatus = JSON.parse(this.responseText).status;
+    checkBox.setAttribute('checked', doneStatus);
   });
 };
 
