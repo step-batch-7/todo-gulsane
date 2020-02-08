@@ -46,27 +46,6 @@ body {
   padding: 5vh;
 }
 
-.cardLayout {
-  border: 1px solid black;
-  height: 60vh;
-  width: 25vw;
-  margin: 4vh;
-  border-bottom: 1px solid black;
-}
-
-.cardHeader {
-  border-bottom: 1px solid black;
-  height: 15%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.cardBody {
-  display: flex;
-  flex-direction: column;
-}
-
 .headTitle {
   flex: 90%;
   text-align: center;
@@ -118,12 +97,32 @@ body {
   align-self: center;
 }
 
+.cardLayout {
+  border: 1px solid black;
+  height: 60vh;
+  width: 25vw;
+  margin: 4vh;
+  display: flex;
+  flex-direction: column;
+}
+.cardHeader {
+  border-bottom: 1px solid black;
+  flex: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  flex: 90%;
+}
 .taskDiv {
   margin-top: 1vh;
   display: flex;
-  height: 5vh;
   width: 100%;
-  border: 1px solid black;
+  border: 1px solid transparent;
 }
 .checkBox {
   margin-left: 1vw;
@@ -135,6 +134,9 @@ body {
 }
 .taskName {
   flex: 80%;
+  overflow: scroll;
+  word-wrap: break-word;
+  word-break: break-all;
   align-self: center;
 }
 .taskDeleteIcon {
