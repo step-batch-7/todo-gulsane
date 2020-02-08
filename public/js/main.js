@@ -64,12 +64,21 @@ const createCardBody = function(tasks) {
   return cardBody;
 };
 
+const createCardFooter = function() {
+  const footer = document.createElement('div');
+  footer.className = 'cardFooter';
+  const input = document.createElement('input');
+  footer.appendChild(input);
+  return footer;
+};
+
 const addToDoCard = function(respondedTodo) {
   const cardLayout = document.createElement('div');
   cardLayout.className = 'cardLayout';
   cardLayout.id = respondedTodo.id;
   cardLayout.appendChild(createCardHeader(respondedTodo.title));
   cardLayout.appendChild(createCardBody(respondedTodo.tasks));
+  cardLayout.appendChild(createCardFooter());
   return cardLayout;
 };
 
