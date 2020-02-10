@@ -1,7 +1,7 @@
-const { env } = require('process');
+const {env} = require('process');
 
 const config = {
   DATA_STORE: env.DATA_STORE
 };
 
-module.exports = { config };
+module.exports = {config};

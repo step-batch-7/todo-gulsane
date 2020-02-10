@@ -1,4 +1,4 @@
-const createDustbin = function() {
+const createDustbin = function () {
   const dustbin = document.createElement('img');
   dustbin.className = 'dustbin';
   dustbin.setAttribute('src', 'images/delete.png');
@@ -6,7 +6,7 @@ const createDustbin = function() {
   return dustbin;
 };
 
-const createCardHeader = function(title) {
+const createCardHeader = function (title) {
   const cardHeader = document.createElement('div');
   cardHeader.className = 'cardHeader';
   const headTitle = document.createElement('h3');
@@ -17,7 +17,7 @@ const createCardHeader = function(title) {
   return cardHeader;
 };
 
-const createCheckBox = function(status) {
+const createCheckBox = function (status) {
   const div = document.createElement('div');
   const checkBox = document.createElement('input');
   div.className = 'checkBox';
@@ -28,7 +28,7 @@ const createCheckBox = function(status) {
   return div;
 };
 
-const createTaskName = function(task) {
+const createTaskName = function (task) {
   const taskName = document.createElement('div');
   taskName.className = 'taskName';
   taskName.setAttribute('contentEditable', true);
@@ -37,7 +37,7 @@ const createTaskName = function(task) {
   return taskName;
 };
 
-const createTaskDeleteIcon = function() {
+const createTaskDeleteIcon = function () {
   const taskDeleteIcon = document.createElement('div');
   taskDeleteIcon.className = 'taskDeleteIcon';
   taskDeleteIcon.onclick = deleteTask;
@@ -47,7 +47,7 @@ const createTaskDeleteIcon = function() {
   return taskDeleteIcon;
 };
 
-const createTaskDiv = function(id, title, status) {
+const createTaskDiv = function (id, title, status) {
   const taskDiv = document.createElement('div');
   taskDiv.className = 'taskDiv';
   taskDiv.id = id;
@@ -57,16 +57,16 @@ const createTaskDiv = function(id, title, status) {
   return taskDiv;
 };
 
-const createCardBody = function(tasks) {
+const createCardBody = function (tasks) {
   const cardBody = document.createElement('div');
   cardBody.className = 'cardBody';
-  tasks.forEach(function(task) {
+  tasks.forEach(function (task) {
     cardBody.appendChild(createTaskDiv(task.id, task.title, task.hasDone));
   });
   return cardBody;
 };
 
-const createCardFooter = function() {
+const createCardFooter = function () {
   const footer = document.createElement('div');
   footer.className = 'cardFooter';
   const input = document.createElement('input');
@@ -77,7 +77,7 @@ const createCardFooter = function() {
   return footer;
 };
 
-const addToDoCard = function(respondedTodo) {
+const addToDoCard = function (respondedTodo) {
   const cardLayout = document.createElement('div');
   cardLayout.className = 'cardLayout';
   cardLayout.id = respondedTodo.id;
@@ -87,8 +87,8 @@ const addToDoCard = function(respondedTodo) {
   return cardLayout;
 };
 
-const loadAllToDo = function() {
-  requestGet('/toDoList', function() {
+const loadAllToDo = function () {
+  requestGet('/toDoList', function () {
     if (this.status === 200) {
       const toDoList = JSON.parse(this.responseText);
       const rightContainer = document.querySelector('.rightContainer');
@@ -99,18 +99,18 @@ const loadAllToDo = function() {
   });
 };
 
-const extractToDoContent = function() {
+const extractToDoContent = function () {
   const title = document.querySelector('#F_title').value;
   const tasksElements = document.querySelectorAll('.F_tasks');
   const tasks = Array.from(tasksElements).map(task => {
     return task.innerText;
   });
-  return { title, tasks };
+  return {title, tasks};
 };
 
-const saveToDo = function() {
+const saveToDo = function () {
   const toDoContent = extractToDoContent();
-  requestPost('/saveToDo', toDoContent, function() {
+  requestPost('/saveToDo', toDoContent, function () {
     if (this.status === 200) {
       const rightContainer = document.querySelector('.rightContainer');
       const respondedToDo = JSON.parse(this.responseText);
@@ -119,41 +119,41 @@ const saveToDo = function() {
   });
 };
 
-const deleteToDo = function() {
+const deleteToDo = function () {
   const toDoCard = event.target.parentElement.parentElement;
-  const data = { id: toDoCard.id };
-  requestPost('/deleteToDo', data, function() {
+  const data = {id: toDoCard.id};
+  requestPost('/deleteToDo', data, function () {
     toDoCard.remove();
   });
 };
 
-const deleteTask = function() {
+const deleteTask = function () {
   const taskDiv = event.target.parentElement.parentElement;
   const taskId = taskDiv.id;
   const toDoId = taskDiv.parentElement.parentElement.id;
-  requestPost('/deleteTask', { toDoId, taskId }, function() {
+  requestPost('/deleteTask', {toDoId, taskId}, function () {
     taskDiv.remove();
   });
 };
 
-const toggleTaskStatus = function() {
+const toggleTaskStatus = function () {
   const checkBox = event.target;
   const taskDiv = event.target.parentElement.parentElement;
   const taskId = taskDiv.id;
   const toDoId = taskDiv.parentElement.parentElement.id;
-  requestPost('/toggleTaskStatus', { toDoId, taskId }, function() {
+  requestPost('/toggleTaskStatus', {toDoId, taskId}, function () {
     const doneStatus = JSON.parse(this.responseText).status;
     checkBox.setAttribute('checked', doneStatus);
   });
 };
 
-const addNewTask = function() {
+const addNewTask = function () {
   if (event.key === 'Enter') {
     const title = event.srcElement.value;
     event.srcElement.value = '';
     const toDo = event.srcElement.parentElement.parentElement;
-    requestPost('/addNewTask', { toDoId: toDo.id, title }, function() {
-      const { id, title, hasDone } = JSON.parse(this.responseText).task;
+    requestPost('/addNewTask', {toDoId: toDo.id, title}, function () {
+      const {id, title, hasDone} = JSON.parse(this.responseText).task;
       const cardBody = toDo.querySelector('.cardBody');
       cardBody.appendChild(createTaskDiv(id, title, hasDone));
       cardBody.scrollTop = cardBody.scrollHeight;
@@ -161,16 +161,16 @@ const addNewTask = function() {
   }
 };
 
-const changeTaskTitle = function() {
+const changeTaskTitle = function () {
   const taskName = event.target;
   const newTitle = taskName.innerText;
   const taskDiv = taskName.parentElement;
   const taskId = taskDiv.id;
   const toDoId = taskDiv.parentElement.parentElement.id;
-  requestPost('/changeTaskTitle', { toDoId, taskId, newTitle }, function() {});
+  requestPost('/changeTaskTitle', {toDoId, taskId, newTitle}, function () {});
 };
 
-const request = function(method, url, data, callBack) {
+const request = function (method, url, data, callBack) {
   const xhr = new XMLHttpRequest();
   xhr.open(method, url);
   xhr.onload = callBack;
@@ -181,12 +181,12 @@ const requestGet = (url, callBack) => request('GET', url, {}, callBack);
 const requestPost = (url, data, callBack) =>
   request('POST', url, data, callBack);
 
-const removeTask = function() {
+const removeTask = function () {
   const taskArea = event.target.parentElement;
   taskArea.remove();
 };
 
-const createTaskRemoverIcon = function() {
+const createTaskRemoverIcon = function () {
   const icon = document.createElement('img');
   icon.className = 'taskRemoverIcon';
   icon.setAttribute('src', 'images/delete.png');
@@ -194,7 +194,7 @@ const createTaskRemoverIcon = function() {
   return icon;
 };
 
-const createTask = function(task) {
+const createTask = function (task) {
   const taskArea = document.createElement('div');
   taskArea.className = 'taskArea';
   const paragraph = document.createElement('p');
@@ -205,7 +205,7 @@ const createTask = function(task) {
   return taskArea;
 };
 
-const appendTask = function() {
+const appendTask = function () {
   const formBody = document.querySelector('.formBody');
   const task = document.querySelector('#F_inputTask').value;
   formBody.append(createTask(task));
