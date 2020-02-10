@@ -31,6 +31,8 @@ const createCheckBox = function(status) {
 const createTaskName = function(task) {
   const taskName = document.createElement('div');
   taskName.className = 'taskName';
+  taskName.setAttribute('contentEditable', true);
+  taskName.onblur = changeTaskTitle;
   taskName.innerText = task;
   return taskName;
 };
@@ -68,6 +70,7 @@ const createCardFooter = function() {
   const footer = document.createElement('div');
   footer.className = 'cardFooter';
   const input = document.createElement('input');
+  input.setAttribute('placeholder', 'Add new Task...');
   input.className = 'newTask';
   input.onkeydown = addNewTask;
   footer.appendChild(input);
@@ -156,6 +159,15 @@ const addNewTask = function() {
       cardBody.scrollTop = cardBody.scrollHeight;
     });
   }
+};
+
+const changeTaskTitle = function() {
+  const taskName = event.target;
+  const newTitle = taskName.innerText;
+  const taskDiv = taskName.parentElement;
+  const taskId = taskDiv.id;
+  const toDoId = taskDiv.parentElement.parentElement.id;
+  requestPost('/changeTaskTitle', { toDoId, taskId, newTitle }, function() {});
 };
 
 const request = function(method, url, data, callBack) {
