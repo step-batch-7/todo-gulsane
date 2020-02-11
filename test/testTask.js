@@ -5,9 +5,18 @@ describe('Task', () => {
   context('load', () => {
     it('should change instance to Task', () => {
       const obj = {id: 'task-1', text: 'Math', hasDone: false};
-      const taskObj = Task.load(obj);
-      assert.deepEqual(taskObj, obj);
-      assert.ok(taskObj instanceof Task);
+      const task = Task.load(obj);
+      assert.deepEqual(task, obj);
+      assert.ok(task instanceof Task);
+    });
+  });
+
+  context('toggleDoneStatus', () => {
+    it('should toggle the hasDone value', () => {
+      const obj = {id: 'task-1', text: 'Math', hasDone: false};
+      const task = Task.load(obj);
+      task.toggleDoneStatus();
+      assert.strictEqual(task.hasDone, true);
     });
   });
 });
