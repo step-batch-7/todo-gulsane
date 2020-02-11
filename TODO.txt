@@ -52,6 +52,7 @@ version[1]
 
 --DONE-- * Refactor handlers name
 --DONE-- * Add Content-Type in response for all handlers
+--DONE-- * Modify Delete
 
 * Add save method in ToDoListCollection
 * Change writeDataFile function to toDoListCollectionWriter
