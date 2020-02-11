@@ -17,8 +17,8 @@ describe('ToDoList', () => {
       const obj = {id: 'tl-1', title: 'Home Work', tasks: []};
       const toDoList = ToDoList.load(obj);
       toDoList.add('Math');
-      const expectedTasks = [new Task('task-1', 'Math', false)];
-      assert.deepStrictEqual(toDoList.tasks, expectedTasks);
+      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [new Task('task-1', 'Math', false)]);
+      assert.deepStrictEqual(toDoList, expectedToDoList);
     });
 
     it('should create and add task if tasks is not empty', () => {
@@ -29,11 +29,11 @@ describe('ToDoList', () => {
       };
       const toDoList = ToDoList.load(obj);
       toDoList.add('English');
-      const expectedTasks = [
+      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [
         new Task('task-1', 'Math', true),
         new Task('task-2', 'English', false)
-      ];
-      assert.deepStrictEqual(toDoList.tasks, expectedTasks);
+      ]);
+      assert.deepStrictEqual(toDoList, expectedToDoList);
     });
   });
 
@@ -46,8 +46,8 @@ describe('ToDoList', () => {
       };
       const toDoList = ToDoList.load(obj);
       toDoList.delete('task-1');
-      const expectedTasks = [];
-      assert.deepStrictEqual(toDoList.tasks, expectedTasks);
+      const expectedToDoList = new ToDoList('tl-1', 'Home Work', []);
+      assert.deepStrictEqual(toDoList, expectedToDoList);
     });
   });
 
@@ -60,10 +60,10 @@ describe('ToDoList', () => {
       };
       const toDoList = ToDoList.load(obj);
       toDoList.toggleStatus('task-1');
-      const expectedTasks = [
+      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [
         new Task('task-1', 'Math', true)
-      ];
-      assert.deepStrictEqual(toDoList.tasks, expectedTasks);
+      ]);
+      assert.deepStrictEqual(toDoList, expectedToDoList);
     });
   });
 });

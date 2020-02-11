@@ -16,7 +16,8 @@ describe('Task', () => {
       const obj = {id: 'task-1', text: 'Math', hasDone: false};
       const task = Task.load(obj);
       task.toggleDoneStatus();
-      assert.strictEqual(task.hasDone, true);
+      const expectedTask = new Task('task-1', 'Math', true);
+      assert.deepStrictEqual(task, expectedTask);
     });
   });
 });
