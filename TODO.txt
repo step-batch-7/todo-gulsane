@@ -51,7 +51,7 @@ version[1]
 --DONE-- * Add lastToDoList getter in ToDoListCollection
 
 * Refactor handlers name
-* Add Content-Type in response for all handlers
+--DONE-- * Add Content-Type in response for all handlers
 
 * Add save method in ToDoListCollection
 * Change writeDataFile function to toDoListCollectionWriter
