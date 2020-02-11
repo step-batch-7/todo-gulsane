@@ -36,4 +36,18 @@ describe('ToDoList', () => {
       assert.deepStrictEqual(toDoList.tasks, expectedTasks);
     });
   });
+
+  context('delete', () => {
+    it('should delete task', () => {
+      const obj = {
+        id: 'tl-1', title: 'Home Work', tasks: [
+          {id: 'task-1', text: 'Math', hasDone: true}
+        ]
+      };
+      const toDoList = ToDoList.load(obj);
+      toDoList.delete('task-1');
+      const expectedTasks = [];
+      assert.deepStrictEqual(toDoList.tasks, expectedTasks);
+    });
+  });
 });
