@@ -10,4 +10,13 @@ describe('ToDoListCollection', () => {
       assert.ok(toDoListCollection instanceof ToDoListCollection);
     });
   });
+
+  context('toJSON', () => {
+    it('should return stringify toDoLists', () => {
+      const list = [{id: 'tl-1', title: 'Home Work', tasks: []}];
+      const toDoListCollection = ToDoListCollection.load(list);
+      const expectedString = JSON.stringify(list);
+      assert.strictEqual(toDoListCollection.toJSON(), expectedString);
+    });
+  });
 });
