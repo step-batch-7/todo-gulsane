@@ -1,6 +1,7 @@
 const assert = require('assert');
 const {ToDoListCollection} = require('../lib/toDoListCollection');
 const {ToDoList} = require('../lib/toDoList');
+const {Task} = require('../lib/task');
 
 describe('ToDoListCollection', () => {
   context('load', () => {
@@ -69,6 +70,21 @@ describe('ToDoListCollection', () => {
       const toDoListCollection = ToDoListCollection.load(availableList);
       toDoListCollection.delete('tl-1');
       const list = [new ToDoList('tl-2', 'Class Work', [])];
+      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
+    });
+  });
+
+  context('addTask', () => {
+    it('should delete toDoList', () => {
+      const availableList = [
+        {id: 'tl-1', title: 'Home Work', tasks: []}
+      ];
+      const toDoListCollection = ToDoListCollection.load(availableList);
+      toDoListCollection.addTask('tl-1', 'Maths');
+      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [
+        new Task('task-1', 'Maths', false)
+      ]);
+      const list = [expectedToDoList];
       assert.deepStrictEqual(toDoListCollection.toDoLists, list);
     });
   });
