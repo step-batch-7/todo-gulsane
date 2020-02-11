@@ -44,10 +44,8 @@ describe('ToDoListCollection', () => {
     it('should create toDoList and add if toDoLists is empty', () => {
       const toDoListCollection = ToDoListCollection.load([]);
       toDoListCollection.add('Home Work');
-      const list = [{id: 'tl-1', title: 'Home Work', tasks: []}];
-      const expectedString = JSON.stringify(list);
-      assert.strictEqual(toDoListCollection.toJSON(), expectedString);
-      assert.ok(toDoListCollection.lastToDoList instanceof ToDoList);
+      const list = [new ToDoList('tl-1', 'Home Work', [])];
+      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
     });
 
     it('should create toDoList and add if toDoLists is not empty', () => {
@@ -55,12 +53,23 @@ describe('ToDoListCollection', () => {
       const toDoListCollection = ToDoListCollection.load(availableList);
       toDoListCollection.add('Class Work');
       const list = [
+        new ToDoList('tl-1', 'Home Work', []),
+        new ToDoList('tl-2', 'Class Work', [])
+      ];
+      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
+    });
+  });
+
+  context('delete', () => {
+    it('should delete toDoList', () => {
+      const availableList = [
         {id: 'tl-1', title: 'Home Work', tasks: []},
         {id: 'tl-2', title: 'Class Work', tasks: []}
       ];
-      const expectedString = JSON.stringify(list);
-      assert.strictEqual(toDoListCollection.toJSON(), expectedString);
-      assert.ok(toDoListCollection.lastToDoList instanceof ToDoList);
+      const toDoListCollection = ToDoListCollection.load(availableList);
+      toDoListCollection.delete('tl-1');
+      const list = [new ToDoList('tl-2', 'Class Work', [])];
+      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
     });
   });
 });
