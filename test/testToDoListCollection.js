@@ -19,4 +19,23 @@ describe('ToDoListCollection', () => {
       assert.strictEqual(toDoListCollection.toJSON(), expectedString);
     });
   });
+
+  context('lastToDoList', () => {
+    it('should return lastToDoList if toDoLists is not empty', () => {
+      const list = [
+        {id: 'tl-1', title: 'Home Work', tasks: []},
+        {id: 'tl-2', title: 'Class Work', tasks: []}
+      ];
+      const toDoListCollection = ToDoListCollection.load(list);
+      const expectedToDoList = {id: 'tl-2', title: 'Class Work', tasks: []};
+      assert.deepEqual(toDoListCollection.lastToDoList, expectedToDoList);
+    });
+
+    it('should return lastToDoList if toDoLists is empty', () => {
+      const list = [];
+      const toDoListCollection = ToDoListCollection.load(list);
+      const expectedToDoList = undefined;
+      assert.strictEqual(toDoListCollection.lastToDoList, expectedToDoList);
+    });
+  });
 });
