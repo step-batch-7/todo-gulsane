@@ -88,4 +88,21 @@ describe('ToDoListCollection', () => {
       assert.deepStrictEqual(toDoListCollection.toDoLists, list);
     });
   });
+
+  context('getLastTask', () => {
+    it('should return last task for given toDoList', () => {
+      const availableList = [
+        {
+          id: 'tl-1', title: 'Home Work', tasks: [
+            {id: 'task-1', text: 'Maths', hasDone: false},
+            {id: 'task-2', text: 'English', hasDone: false}
+          ]
+        }
+      ];
+      const toDoListCollection = ToDoListCollection.load(availableList);
+      const lastTask = toDoListCollection.getLastTask('tl-1');
+      const expectedTask = new Task('task-2', 'English', false);
+      assert.deepStrictEqual(lastTask, expectedTask);
+    });
+  });
 });
