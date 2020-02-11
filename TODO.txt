@@ -43,12 +43,12 @@ version[1]
 * Remove the inner text of the toDo form after each submission
 
 --------------------------------------AFTER PAIRING----------------------------------
-* Extract ToDoList and Task classes in different files
-* Change name from ToDoList to ToDoListCollection class
-* Add addToDoList method to ToDoListCollection
-* Add load method to ToDoList and Task classes
-* Modify load method of ToDoListCollection
-* Add lastToDoList getter in ToDoListCollection
+--DONE-- * Extract ToDoList and Task classes in different files
+--DONE-- * Change name from ToDoList to ToDoListCollection class
+--DONE-- * Add addToDoList method to ToDoListCollection
+--DONE-- * Add load method to ToDoList and Task classes
+--DONE-- * Modify load method of ToDoListCollection
+--DONE-- * Add lastToDoList getter in ToDoListCollection
 
 * Add save method in ToDoListCollection
 * Change writeDataFile function to toDoListCollectionWriter
