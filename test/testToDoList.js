@@ -50,4 +50,20 @@ describe('ToDoList', () => {
       assert.deepStrictEqual(toDoList.tasks, expectedTasks);
     });
   });
+
+  context('toggleStatus', () => {
+    it('should toggle the given task status', () => {
+      const obj = {
+        id: 'tl-1', title: 'Home Work', tasks: [
+          {id: 'task-1', text: 'Math', hasDone: false}
+        ]
+      };
+      const toDoList = ToDoList.load(obj);
+      toDoList.toggleStatus('task-1');
+      const expectedTasks = [
+        new Task('task-1', 'Math', true)
+      ];
+      assert.deepStrictEqual(toDoList.tasks, expectedTasks);
+    });
+  });
 });
