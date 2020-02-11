@@ -105,4 +105,24 @@ describe('ToDoListCollection', () => {
       assert.deepStrictEqual(lastTask, expectedTask);
     });
   });
+
+  context('deleteTask', () => {
+    it('should delete task', () => {
+      const availableList = [
+        {
+          id: 'tl-1', title: 'Home Work', tasks: [
+            {id: 'task-1', text: 'Maths', hasDone: false},
+            {id: 'task-2', text: 'English', hasDone: false}
+          ]
+        }
+      ];
+      const toDoListCollection = ToDoListCollection.load(availableList);
+      toDoListCollection.deleteTask('tl-1', 'task-1');
+      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [
+        new Task('task-2', 'English', false)
+      ]);
+      const list = [expectedToDoList];
+      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
+    });
+  });
 });
