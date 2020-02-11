@@ -153,9 +153,9 @@ const addNewTask = function () {
     event.srcElement.value = '';
     const toDo = event.srcElement.parentElement.parentElement;
     requestPost('/addNewTask', {toDoId: toDo.id, title}, function () {
-      const {id, title, hasDone} = JSON.parse(this.responseText).task;
+      const {id, text, hasDone} = JSON.parse(this.responseText);
       const cardBody = toDo.querySelector('.cardBody');
-      cardBody.appendChild(createTaskDiv(id, title, hasDone));
+      cardBody.appendChild(createTaskDiv(id, text, hasDone));
       cardBody.scrollTop = cardBody.scrollHeight;
     });
   }
