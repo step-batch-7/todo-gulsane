@@ -163,11 +163,11 @@ const addNewTask = function () {
 
 const changeTaskTitle = function () {
   const taskName = event.target;
-  const newTitle = taskName.innerText;
+  const newText = taskName.innerText;
   const taskDiv = taskName.parentElement;
   const taskId = taskDiv.id;
-  const toDoId = taskDiv.parentElement.parentElement.id;
-  requestPost('/changeTaskTitle', {toDoId, taskId, newTitle}, function () {});
+  const toDoListId = taskDiv.parentElement.parentElement.id;
+  requestPost('/changeTaskText', {toDoListId, taskId, newText}, function () {});
 };
 
 const request = function (method, url, data, callBack) {

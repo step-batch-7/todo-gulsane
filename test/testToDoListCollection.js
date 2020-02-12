@@ -167,4 +167,26 @@ describe('ToDoListCollection', () => {
       assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
     });
   });
+
+  context('changeTaskText', () => {
+    it('should change the text of task for given task', () => {
+      const availableList = [
+        {
+          id: 'tl-1', title: 'Home Work', tasks: [
+            {id: 'task-1', text: 'Maths', hasDone: false},
+            {id: 'task-2', text: 'English', hasDone: false}
+          ]
+        }
+      ];
+      const toDoListCollection = ToDoListCollection.load(availableList);
+      toDoListCollection.changeTaskText('tl-1', 'task-1', 'Physics');
+      const expToDoListCollection = new ToDoListCollection([
+        new ToDoList('tl-1', 'Home Work', [
+          new Task('task-1', 'Physics', false),
+          new Task('task-2', 'English', false),
+        ])
+      ]);
+      assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
+    });
+  });
 });
