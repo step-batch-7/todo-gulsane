@@ -91,7 +91,7 @@ const loadAllToDo = function () {
   requestGet('/toDoLists', function () {
     if (this.status === 200) {
       const toDoList = JSON.parse(this.responseText);
-      const rightContainer = document.querySelector('.rightContainer');
+      const rightContainer = document.querySelector('.todo-list-container');
       toDoList.forEach(element => {
         rightContainer.appendChild(addToDoCard(element));
       });
@@ -99,20 +99,16 @@ const loadAllToDo = function () {
   });
 };
 
-const extractToDoContent = function () {
-  const title = document.querySelector('#F_title').value;
-  const tasksElements = document.querySelectorAll('.F_tasks');
-  const tasks = Array.from(tasksElements).map(task => {
-    return task.innerText;
-  });
-  return {title, tasks};
+const extractToDoTitle = function () {
+  const title = document.querySelector('#new-title').value;
+  return title;
 };
 
-const saveToDo = function () {
-  const toDoContent = extractToDoContent();
-  requestPost('/addToDoList', toDoContent, function () {
+const addToDoList = function () {
+  const title = extractToDoTitle();
+  requestPost('/addToDoList', {title}, function () {
     if (this.status === 200) {
-      const rightContainer = document.querySelector('.rightContainer');
+      const rightContainer = document.querySelector('.todo-list-container');
       const respondedToDo = JSON.parse(this.responseText);
       rightContainer.appendChild(addToDoCard(respondedToDo));
     }
@@ -170,6 +166,9 @@ const request = function (method, url, data, callBack) {
   const xhr = new XMLHttpRequest();
   xhr.open(method, url);
   xhr.onload = callBack;
+  if (method === 'POST') {
+    xhr.setRequestHeader('Content-Type', 'application/json');
+  }
   xhr.send(JSON.stringify(data));
 };
 

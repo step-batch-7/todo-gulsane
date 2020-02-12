@@ -1,36 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>ToDo</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <script src="js/main.js"></script>
-  </head>
-  <body>
-    <div class="topHeader">
-      <div id="newTitleAddButton">
-        <img src="images/addButton.png" alt="" />
-      </div>
-      <div class="topHeading">TODO</div>
-    </div>
-    <div class="pageContainer">
-      <div class="leftContainer">
-        <div class="toDoForm">
-          <div class="formHeader">
-            <input type="text" placeholder="Add Title..." id="F_title" />
-          </div>
-          <div class="formBody"></div>
-          <div class="formFooter">
-            <input type="text" placeholder="Add Task..." id="F_inputTask" />
-            <button onclick="appendTask()" id="taskAdder">Add Task</button>
-            <button id="formSubmitter" onclick="saveToDo()">Submit</button>
-            <button id="formCanceler">Cancel</button>
-          </div>
-        </div>
-      </div>
-      <div class="rightContainer"></div>
-    </div>
-  </body>
+<html>
+
+<head>
+  <title>ToDo</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <script src="js/main.js"></script>
+</head>
+
+<body>
+  <div class="top-header">
+    <div class="top-heading">TODO</div>
+  </div>
+  <div class="sub-header">
+    <input type="text" placeholder="Enter Title..." id="new-title" />
+    <a id="title-add-link" onclick="addToDoList()"><img
+        src="images/addToDoList.png" alt="add"></a>
+  </div>
+  <div class="todo-list-container"></div>
+  </div>
+</body>
+
 </html>
