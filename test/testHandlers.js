@@ -132,4 +132,25 @@ describe('POST', () => {
         .expect(200, done);
     });
   });
+
+  context('changeToDoListTitle', () => {
+    before(() => {
+      const sampleData = `[
+        {"id":"tl-1","title":"Home Work","tasks":[
+          {"id":"task-1","text":"Maths","hasDone":false},
+          {"id":"task-2","text":"English","hasDone":false}
+        ]},
+        {"id":"tl-2","title":"Class Work","tasks":[]}
+      ]`;
+      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
+    });
+
+    it('should change the title of given toDoList', (done) => {
+      req(app.serve.bind(app))
+        .post('/changeToDoListTitle')
+        .set('Content-Type', 'application/json')
+        .send('{"toDoListId":"tl-1","newTitle":"Assignment"}')
+        .expect(200, done);
+    });
+  });
 });
