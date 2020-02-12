@@ -153,4 +153,25 @@ describe('POST', () => {
         .expect(200, done);
     });
   });
+
+  context('changeTaskText', () => {
+    before(() => {
+      const sampleData = `[
+        {"id":"tl-1","title":"Home Work","tasks":[
+          {"id":"task-1","text":"Maths","hasDone":false},
+          {"id":"task-2","text":"English","hasDone":false}
+        ]},
+        {"id":"tl-2","title":"Class Work","tasks":[]}
+      ]`;
+      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
+    });
+
+    it('should change the text of given task', (done) => {
+      req(app.serve.bind(app))
+        .post('/changeTaskText')
+        .set('Content-Type', 'application/json')
+        .send('{"toDoListId":"tl-1","taskId":"task-1","newText":"Assignment"}')
+        .expect(200, done);
+    });
+  });
 });
