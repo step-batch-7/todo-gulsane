@@ -130,8 +130,8 @@ const deleteToDo = function () {
 const deleteTask = function () {
   const taskDiv = event.target.parentElement.parentElement;
   const taskId = taskDiv.id;
-  const toDoId = taskDiv.parentElement.parentElement.id;
-  requestPost('/deleteTask', {toDoId, taskId}, function () {
+  const toDoListId = taskDiv.parentElement.parentElement.id;
+  requestPost('/deleteTask', {toDoListId, taskId}, function () {
     taskDiv.remove();
   });
 };

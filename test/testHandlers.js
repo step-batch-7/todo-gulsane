@@ -53,4 +53,62 @@ describe('POST', () => {
         .expect('{"id":"tl-1","title":"Home Work","tasks":[]}');
     });
   });
+
+  context('deleteToDoList', () => {
+    before(() => {
+      const sampleData = `[
+        {"id":"tl-1","title":"Home Work","tasks":[]},
+        {"id":"tl-2","title":"Class Work","tasks":[]}
+      ]`;
+      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
+    });
+
+    it('should delete toDoList', (done) => {
+      req(app.serve.bind(app))
+        .post('/deleteToDoList')
+        .set('Content-Type', 'application/json')
+        .send('{"toDoListId":"tl-1"}')
+        .expect(200, done);
+    });
+  });
+
+  context('deleteToDoList', () => {
+    before(() => {
+      const sampleData = `[
+        {"id":"tl-1","title":"Home Work","tasks":[]},
+        {"id":"tl-2","title":"Class Work","tasks":[]}
+      ]`;
+      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
+    });
+
+    it('should delete toDoList', (done) => {
+      req(app.serve.bind(app))
+        .post('/addTask')
+        .set('Content-Type', 'application/json')
+        .send('{"toDoListId":"tl-1","text":"Maths"}')
+        .expect(200, done)
+        .expect('{"id":"task-1","text":"Maths","hasDone":false}');
+    });
+  });
+
+  context('deleteTask', () => {
+    before(() => {
+      const sampleData = `[
+        {"id":"tl-1","title":"Home Work","tasks":[
+          {"id":"task-1","text":"Maths","hasDone":false},
+          {"id":"task-2","text":"English","hasDone":false}
+        ]},
+        {"id":"tl-2","title":"Class Work","tasks":[]}
+      ]`;
+      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
+    });
+
+    it('should delete toDoList', (done) => {
+      req(app.serve.bind(app))
+        .post('/deleteTask')
+        .set('Content-Type', 'application/json')
+        .send('{"toDoListId":"tl-1","taskId":"task-2"}')
+        .expect(200, done);
+    });
+  });
 });
