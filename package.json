@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "touch $(pwd)/test/resources/toDoLists.json;export DATA_STORE=$(pwd)/test/resources/toDoLists.json; nyc mocha;rm $(pwd)/test/resources/toDoLists.json",
-    "start": "mkdir data;export DATA_STORE=$(pwd)/data/toDoLists.json; node server.js 8000"
+    "start": "export DATA_STORE=$(pwd)/data/toDoLists.json; node server.js 8000"
   },
   "repository": {
     "type": "git",

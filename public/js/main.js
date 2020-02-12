@@ -110,7 +110,7 @@ const extractToDoContent = function () {
 
 const saveToDo = function () {
   const toDoContent = extractToDoContent();
-  requestPost('/saveToDo', toDoContent, function () {
+  requestPost('/addToDoList', toDoContent, function () {
     if (this.status === 200) {
       const rightContainer = document.querySelector('.rightContainer');
       const respondedToDo = JSON.parse(this.responseText);
@@ -121,8 +121,8 @@ const saveToDo = function () {
 
 const deleteToDo = function () {
   const toDoCard = event.target.parentElement.parentElement;
-  const data = {id: toDoCard.id};
-  requestPost('/deleteToDo', data, function () {
+  const data = {toDoListId: toDoCard.id};
+  requestPost('/deleteToDoList', data, function () {
     toDoCard.remove();
   });
 };
