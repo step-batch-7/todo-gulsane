@@ -151,4 +151,20 @@ describe('ToDoListCollection', () => {
       assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
     });
   });
+
+  context('changeToDoListTitle', () => {
+    it('should change the title of given toDoList', () => {
+      const availableList = [
+        {id: 'tl-1', title: 'Home Work', tasks: []},
+        {id: 'tl-2', title: 'Class Work', tasks: []}
+      ];
+      const toDoListCollection = ToDoListCollection.load(availableList);
+      toDoListCollection.changeToDoListTitle('tl-1', 'Assignment');
+      const expToDoListCollection = new ToDoListCollection([
+        new ToDoList('tl-1', 'Assignment', []),
+        new ToDoList('tl-2', 'Class Work', [])
+      ]);
+      assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
+    });
+  });
 });
