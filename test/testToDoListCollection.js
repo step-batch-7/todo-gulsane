@@ -45,19 +45,21 @@ describe('ToDoListCollection', () => {
     it('should create toDoList and add if toDoLists is empty', () => {
       const toDoListCollection = ToDoListCollection.load([]);
       toDoListCollection.add('Home Work');
-      const list = [new ToDoList('tl-1', 'Home Work', [])];
-      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
+      const expToDoListCollection = new ToDoListCollection([
+        new ToDoList('tl-1', 'Home Work', [])
+      ]);
+      assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
     });
 
     it('should create toDoList and add if toDoLists is not empty', () => {
       const availableList = [{id: 'tl-1', title: 'Home Work', tasks: []}];
       const toDoListCollection = ToDoListCollection.load(availableList);
       toDoListCollection.add('Class Work');
-      const list = [
+      const expToDoListCollection = new ToDoListCollection([
         new ToDoList('tl-1', 'Home Work', []),
         new ToDoList('tl-2', 'Class Work', [])
-      ];
-      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
+      ]);
+      assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
     });
   });
 
@@ -69,8 +71,10 @@ describe('ToDoListCollection', () => {
       ];
       const toDoListCollection = ToDoListCollection.load(availableList);
       toDoListCollection.delete('tl-1');
-      const list = [new ToDoList('tl-2', 'Class Work', [])];
-      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
+      const expToDoListCollection = new ToDoListCollection([
+        new ToDoList('tl-2', 'Class Work', [])
+      ]);
+      assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
     });
   });
 
@@ -81,11 +85,10 @@ describe('ToDoListCollection', () => {
       ];
       const toDoListCollection = ToDoListCollection.load(availableList);
       toDoListCollection.addTask('tl-1', 'Maths');
-      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [
-        new Task('task-1', 'Maths', false)
+      const expToDoListCollection = new ToDoListCollection([
+        new ToDoList('tl-1', 'Home Work', [new Task('task-1', 'Maths', false)])
       ]);
-      const list = [expectedToDoList];
-      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
+      assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
     });
   });
 
@@ -118,11 +121,12 @@ describe('ToDoListCollection', () => {
       ];
       const toDoListCollection = ToDoListCollection.load(availableList);
       toDoListCollection.deleteTask('tl-1', 'task-1');
-      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [
-        new Task('task-2', 'English', false)
+      const expToDoListCollection = new ToDoListCollection([
+        new ToDoList('tl-1', 'Home Work', [
+          new Task('task-2', 'English', false)
+        ])
       ]);
-      const list = [expectedToDoList];
-      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
+      assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
     });
   });
 
@@ -138,12 +142,13 @@ describe('ToDoListCollection', () => {
       ];
       const toDoListCollection = ToDoListCollection.load(availableList);
       toDoListCollection.toggleTaskStatus('tl-1', 'task-1');
-      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [
-        new Task('task-1', 'Maths', true),
-        new Task('task-2', 'English', false)
+      const expToDoListCollection = new ToDoListCollection([
+        new ToDoList('tl-1', 'Home Work', [
+          new Task('task-1', 'Maths', true),
+          new Task('task-2', 'English', false)
+        ])
       ]);
-      const list = [expectedToDoList];
-      assert.deepStrictEqual(toDoListCollection.toDoLists, list);
+      assert.deepStrictEqual(toDoListCollection, expToDoListCollection);
     });
   });
 });
