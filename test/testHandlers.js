@@ -38,6 +38,10 @@ describe('NOT ALLOWED METHODS', () => {
 });
 
 describe('POST', () => {
+  afterEach(() => {
+    fs.unlinkSync('./test/resources/toDoLists.json');
+  });
+
   context('addToDoList', () => {
     it('should add toDoList and return teh added toDoList', (done) => {
       req(app.serve.bind(app))
@@ -47,21 +51,6 @@ describe('POST', () => {
         .expect(200, done)
         .expect('Content-Type', 'application/json')
         .expect('{"id":"tl-1","title":"Home Work","tasks":[]}');
-    });
-  });
-
-  context('deleteToDoList', () => {
-    before(() => {
-      const sampleData = '[{"id":"tl-1","title":"Home Work","tasks":[]}]';
-      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
-    });
-
-    it('should add toDoList and return teh added toDoList', (done) => {
-      req(app.serve.bind(app))
-        .post('/deleteToDoList')
-        .set('Content-Type', 'application/json')
-        .send('{"toDoListId":"tl-1"}')
-        .expect(200, done);
     });
   });
 });

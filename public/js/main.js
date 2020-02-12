@@ -149,10 +149,10 @@ const toggleTaskStatus = function () {
 
 const addNewTask = function () {
   if (event.key === 'Enter') {
-    const title = event.srcElement.value;
+    const text = event.srcElement.value;
     event.srcElement.value = '';
     const toDo = event.srcElement.parentElement.parentElement;
-    requestPost('/addNewTask', {toDoId: toDo.id, title}, function () {
+    requestPost('/addTask', {toDoListId: toDo.id, text}, function () {
       const {id, text, hasDone} = JSON.parse(this.responseText);
       const cardBody = toDo.querySelector('.cardBody');
       cardBody.appendChild(createTaskDiv(id, text, hasDone));
