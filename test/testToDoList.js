@@ -17,7 +17,9 @@ describe('ToDoList', () => {
       const obj = {id: 'tl-1', title: 'Home Work', tasks: []};
       const toDoList = ToDoList.load(obj);
       toDoList.add('Math');
-      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [new Task('task-1', 'Math', false)]);
+      const expectedToDoList = new ToDoList('tl-1', 'Home Work', [
+        new Task('task-1', 'Math', false)
+      ]);
       assert.deepStrictEqual(toDoList, expectedToDoList);
     });
 

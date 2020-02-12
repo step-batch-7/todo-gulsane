@@ -57,6 +57,7 @@ version[1]
 * Add indicating mechanism for adding/deleting methods of classes
 * Refactor frontend code with page design
 * Add search feature (at frontend)
+* Add checking mechanism whether desired request body is coming or not
 
 * Add save method in ToDoListCollection
 * Change writeDataFile function to toDoListCollectionWriter
