@@ -54,6 +54,10 @@ version[1]
 --DONE-- * Add Content-Type in response for all handlers
 --DONE-- * Modify Delete
 
+* Add indicating mechanism for adding/deleting methods of classes
+* Refactor frontend code with page design
+* Add search feature (at frontend)
+
 * Add save method in ToDoListCollection
 * Change writeDataFile function to toDoListCollectionWriter
   which takes the data and write it to the data file
