@@ -38,6 +38,17 @@ describe('NOT ALLOWED METHODS', () => {
 });
 
 describe('POST', () => {
+  beforeEach(() => {
+    const sampleData = `[
+      {"id":"tl-1","title":"Home Work","tasks":[
+        {"id":"task-1","text":"Maths","hasDone":false},
+        {"id":"task-2","text":"English","hasDone":false}
+      ]},
+      {"id":"tl-2","title":"Class Work","tasks":[]}
+    ]`;
+    fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
+  });
+
   afterEach(() => {
     fs.unlinkSync('./test/resources/toDoLists.json');
   });
@@ -50,19 +61,11 @@ describe('POST', () => {
         .send('{"title":"Home Work"}')
         .expect(200, done)
         .expect('Content-Type', 'application/json')
-        .expect('{"id":"tl-1","title":"Home Work","tasks":[]}');
+        .expect('{"id":"tl-3","title":"Home Work","tasks":[]}');
     });
   });
 
   context('deleteToDoList', () => {
-    before(() => {
-      const sampleData = `[
-        {"id":"tl-1","title":"Home Work","tasks":[]},
-        {"id":"tl-2","title":"Class Work","tasks":[]}
-      ]`;
-      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
-    });
-
     it('should delete toDoList', (done) => {
       req(app.serve.bind(app))
         .post('/deleteToDoList')
@@ -73,36 +76,17 @@ describe('POST', () => {
   });
 
   context('addTask', () => {
-    before(() => {
-      const sampleData = `[
-        {"id":"tl-1","title":"Home Work","tasks":[]},
-        {"id":"tl-2","title":"Class Work","tasks":[]}
-      ]`;
-      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
-    });
-
     it('should add task to the given toDoList', (done) => {
       req(app.serve.bind(app))
         .post('/addTask')
         .set('Content-Type', 'application/json')
-        .send('{"toDoListId":"tl-1","text":"Maths"}')
+        .send('{"toDoListId":"tl-2","text":"Maths"}')
         .expect(200, done)
         .expect('{"id":"task-1","text":"Maths","hasDone":false}');
     });
   });
 
   context('deleteTask', () => {
-    before(() => {
-      const sampleData = `[
-        {"id":"tl-1","title":"Home Work","tasks":[
-          {"id":"task-1","text":"Maths","hasDone":false},
-          {"id":"task-2","text":"English","hasDone":false}
-        ]},
-        {"id":"tl-2","title":"Class Work","tasks":[]}
-      ]`;
-      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
-    });
-
     it('should delete task from given toDoList', (done) => {
       req(app.serve.bind(app))
         .post('/deleteTask')
@@ -113,17 +97,6 @@ describe('POST', () => {
   });
 
   context('toggleTaskStatus', () => {
-    before(() => {
-      const sampleData = `[
-        {"id":"tl-1","title":"Home Work","tasks":[
-          {"id":"task-1","text":"Maths","hasDone":false},
-          {"id":"task-2","text":"English","hasDone":false}
-        ]},
-        {"id":"tl-2","title":"Class Work","tasks":[]}
-      ]`;
-      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
-    });
-
     it('should toggle the task done status for given toDoList', (done) => {
       req(app.serve.bind(app))
         .post('/toggleTaskStatus')
@@ -134,17 +107,6 @@ describe('POST', () => {
   });
 
   context('changeToDoListTitle', () => {
-    before(() => {
-      const sampleData = `[
-        {"id":"tl-1","title":"Home Work","tasks":[
-          {"id":"task-1","text":"Maths","hasDone":false},
-          {"id":"task-2","text":"English","hasDone":false}
-        ]},
-        {"id":"tl-2","title":"Class Work","tasks":[]}
-      ]`;
-      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
-    });
-
     it('should change the title of given toDoList', (done) => {
       req(app.serve.bind(app))
         .post('/changeToDoListTitle')
@@ -155,17 +117,6 @@ describe('POST', () => {
   });
 
   context('changeTaskText', () => {
-    before(() => {
-      const sampleData = `[
-        {"id":"tl-1","title":"Home Work","tasks":[
-          {"id":"task-1","text":"Maths","hasDone":false},
-          {"id":"task-2","text":"English","hasDone":false}
-        ]},
-        {"id":"tl-2","title":"Class Work","tasks":[]}
-      ]`;
-      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
-    });
-
     it('should change the text of given task', (done) => {
       req(app.serve.bind(app))
         .post('/changeTaskText')
