@@ -61,7 +61,7 @@ const createCardBody = function (tasks) {
   const cardBody = document.createElement('div');
   cardBody.className = 'cardBody';
   tasks.forEach(function (task) {
-    cardBody.appendChild(createTaskDiv(task.id, task.title, task.hasDone));
+    cardBody.appendChild(createTaskDiv(task.id, task.text, task.hasDone));
   });
   return cardBody;
 };
