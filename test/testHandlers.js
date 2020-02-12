@@ -72,7 +72,7 @@ describe('POST', () => {
     });
   });
 
-  context('deleteToDoList', () => {
+  context('addTask', () => {
     before(() => {
       const sampleData = `[
         {"id":"tl-1","title":"Home Work","tasks":[]},
@@ -81,7 +81,7 @@ describe('POST', () => {
       fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
     });
 
-    it('should delete toDoList', (done) => {
+    it('should add task to the given toDoList', (done) => {
       req(app.serve.bind(app))
         .post('/addTask')
         .set('Content-Type', 'application/json')
@@ -103,9 +103,30 @@ describe('POST', () => {
       fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
     });
 
-    it('should delete toDoList', (done) => {
+    it('should delete task from given toDoList', (done) => {
       req(app.serve.bind(app))
         .post('/deleteTask')
+        .set('Content-Type', 'application/json')
+        .send('{"toDoListId":"tl-1","taskId":"task-2"}')
+        .expect(200, done);
+    });
+  });
+
+  context('toggleTaskStatus', () => {
+    before(() => {
+      const sampleData = `[
+        {"id":"tl-1","title":"Home Work","tasks":[
+          {"id":"task-1","text":"Maths","hasDone":false},
+          {"id":"task-2","text":"English","hasDone":false}
+        ]},
+        {"id":"tl-2","title":"Class Work","tasks":[]}
+      ]`;
+      fs.writeFileSync('./test/resources/toDoLists.json', sampleData);
+    });
+
+    it('should toggle the task done status for given toDoList', (done) => {
+      req(app.serve.bind(app))
+        .post('/toggleTaskStatus')
         .set('Content-Type', 'application/json')
         .send('{"toDoListId":"tl-1","taskId":"task-2"}')
         .expect(200, done);

@@ -137,14 +137,10 @@ const deleteTask = function () {
 };
 
 const toggleTaskStatus = function () {
-  const checkBox = event.target;
   const taskDiv = event.target.parentElement.parentElement;
   const taskId = taskDiv.id;
-  const toDoId = taskDiv.parentElement.parentElement.id;
-  requestPost('/toggleTaskStatus', {toDoId, taskId}, function () {
-    const doneStatus = JSON.parse(this.responseText).status;
-    checkBox.setAttribute('checked', doneStatus);
-  });
+  const toDoListId = taskDiv.parentElement.parentElement.id;
+  requestPost('/toggleTaskStatus', {toDoListId, taskId}, function () {});
 };
 
 const addNewTask = function () {
