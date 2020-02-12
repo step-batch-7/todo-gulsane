@@ -88,7 +88,7 @@ const addToDoCard = function (respondedTodo) {
 };
 
 const loadAllToDo = function () {
-  requestGet('/toDoList', function () {
+  requestGet('/toDoLists', function () {
     if (this.status === 200) {
       const toDoList = JSON.parse(this.responseText);
       const rightContainer = document.querySelector('.rightContainer');

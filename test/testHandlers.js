@@ -17,4 +17,22 @@ describe('GET', () => {
         .expect(404, done);
     });
   });
+
+  context('serveToDoListCollection', () => {
+    it('should return toDoLists', (done) => {
+      req(app.serve.bind(app))
+        .get('/toDoLists')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json');
+    });
+  });
 });
+
+describe('NOT ALLOWED METHODS', () => {
+  it('should return method not allowed if method is not available', (done) => {
+    req(app.serve.bind(app))
+      .put('/random.html')
+      .expect(400, done);
+  });
+});
+
