@@ -12,9 +12,15 @@
     <div class="top-heading">TODO</div>
   </div>
   <div class="sub-header">
-    <input type="text" placeholder="Enter Title..." id="new-title" />
-    <a id="title-add-link" onclick="addToDoList()"><img
-        src="images/addToDoList.png" alt="add"></a>
+    <div class="create-title-block">
+      <input type="text" placeholder="Enter Title..." id="new-title" />
+      <div id="title-add-link" onclick="addToDoList()"><img
+          src="images/addToDoList.png" alt="add"></div>
+    </div>
+    <div class="search-bars">
+      <input type="text" placeholder="Search Title..." id="search-title" />
+      <input type="text" placeholder="Search Task..." id="search-task" />
+    </div>
   </div>
   <div class="todo-lists-container"></div>
   </div>

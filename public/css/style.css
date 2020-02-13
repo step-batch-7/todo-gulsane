@@ -18,16 +18,21 @@ body {
 }
 
 .sub-header {
-  /* background: rgba(186, 223, 227, 0.7); */
   height: 5vh;
   width: 100%;
   display: flex;
   align-items: center;
-  padding-left: 0.5vw;
+  justify-content: space-between;
+}
+
+.create-title-block{
+  margin-left: 0.5vw;
+  height: 80%;
+  display: flex;
 }
 
 #new-title{
-  height: 60%;
+  height: 90%;
   width: 15vw;
   border: none;
   outline: none;
@@ -36,11 +41,23 @@ body {
 }
 
 #title-add-link{
-  height: 60%;
+  height: 100%;
 }
 
 #title-add-link img{
   height: 100%;
+}
+.search-bars{
+  height: 80%;
+  margin-right: 1vw;
+  align-items: center;
+}
+
+.search-bars > input{
+  height: 80%;
+  width: 10vw;
+  outline: none;
+  font-size: 1.8vh;
 }
 
 .todo-lists-container {
