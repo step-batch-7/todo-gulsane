@@ -159,7 +159,7 @@ body {
 .card-footer {
   flex: 5%;
   display: flex;
-  margin: 1vh 1vw 2vh 1vw;
+  margin: 2vh 1vw 2vh 1vw;
 }
 
 .card-footer > input {
@@ -170,4 +170,8 @@ body {
   border: none;
   outline: none;
   border-bottom: 1px solid black;
+}
+
+.hide{
+  display: none;
 }

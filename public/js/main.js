@@ -222,6 +222,25 @@ const appendTask = function () {
   formBody.scrollTop = formBody.scrollHeight;
 };
 
+const isUnmatchedTitle = function (element, searchTitle) {
+  return !element.innerText.toLowerCase().includes(searchTitle.toLowerCase());
+};
+
+const filterTitle = function () {
+  const searchTitle = document.querySelector('#search-title').value;
+  const cardHeadingElements = Array.from(
+    document.querySelectorAll('.card-heading')
+  );
+
+  cardHeadingElements.forEach((element) => {
+    if (searchTitle !== '' && isUnmatchedTitle(element, searchTitle)) {
+      element.parentElement.parentElement.classList.add('hide');
+      return;
+    }
+    element.parentElement.parentElement.classList.remove('hide');
+  });
+};
+
 const main = () => {
   loadAllToDo();
 };
