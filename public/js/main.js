@@ -1,18 +1,22 @@
 const createDustbin = function () {
-  const dustbin = document.createElement('img');
-  dustbin.className = 'dustbin';
-  dustbin.setAttribute('src', 'images/delete.png');
-  dustbin.onclick = deleteToDo;
-  return dustbin;
+  const div = document.createElement('div');
+  div.className = 'delete-todo-list-link';
+  const deleteLink = document.createElement('img');
+  deleteLink.setAttribute('src', 'images/deleteToDoList.png');
+  deleteLink.onclick = deleteToDo;
+  div.appendChild(deleteLink);
+  return div;
 };
 
 const createCardHeader = function (title) {
   const cardHeader = document.createElement('div');
-  cardHeader.className = 'cardHeader';
+  cardHeader.className = 'card-header';
+  const headerDiv = document.createElement('div');
+  headerDiv.className = 'card-heading';
   const headTitle = document.createElement('h3');
-  headTitle.className = 'headTitle';
   headTitle.innerText = title;
-  cardHeader.appendChild(headTitle);
+  headerDiv.appendChild(headTitle);
+  cardHeader.appendChild(headerDiv);
   cardHeader.appendChild(createDustbin());
   return cardHeader;
 };
@@ -20,7 +24,7 @@ const createCardHeader = function (title) {
 const createCheckBox = function (status) {
   const div = document.createElement('div');
   const checkBox = document.createElement('input');
-  div.className = 'checkBox';
+  div.className = 'check-box';
   checkBox.setAttribute('type', 'checkbox');
   checkBox.checked = status;
   checkBox.onclick = toggleTaskStatus;
@@ -30,7 +34,7 @@ const createCheckBox = function (status) {
 
 const createTaskName = function (task) {
   const taskName = document.createElement('div');
-  taskName.className = 'taskName';
+  taskName.className = 'task-text';
   taskName.setAttribute('contentEditable', true);
   taskName.onblur = changeTaskTitle;
   taskName.innerText = task;
@@ -39,17 +43,17 @@ const createTaskName = function (task) {
 
 const createTaskDeleteIcon = function () {
   const taskDeleteIcon = document.createElement('div');
-  taskDeleteIcon.className = 'taskDeleteIcon';
+  taskDeleteIcon.className = 'delete-task-link';
   taskDeleteIcon.onclick = deleteTask;
   const icon = document.createElement('img');
-  icon.setAttribute('src', 'images/delete.png');
+  icon.setAttribute('src', 'images/deleteTask.png');
   taskDeleteIcon.appendChild(icon);
   return taskDeleteIcon;
 };
 
 const createTaskDiv = function (id, title, status) {
   const taskDiv = document.createElement('div');
-  taskDiv.className = 'taskDiv';
+  taskDiv.className = 'task';
   taskDiv.id = id;
   taskDiv.appendChild(createCheckBox(status));
   taskDiv.appendChild(createTaskName(title));
@@ -59,7 +63,7 @@ const createTaskDiv = function (id, title, status) {
 
 const createCardBody = function (tasks) {
   const cardBody = document.createElement('div');
-  cardBody.className = 'cardBody';
+  cardBody.className = 'card-body';
   tasks.forEach(function (task) {
     cardBody.appendChild(createTaskDiv(task.id, task.text, task.hasDone));
   });
@@ -68,9 +72,9 @@ const createCardBody = function (tasks) {
 
 const createCardFooter = function () {
   const footer = document.createElement('div');
-  footer.className = 'cardFooter';
+  footer.className = 'card-footer';
   const input = document.createElement('input');
-  input.setAttribute('placeholder', 'Add new Task...');
+  input.setAttribute('placeholder', 'Add Task...');
   input.className = 'newTask';
   input.onkeydown = addNewTask;
   footer.appendChild(input);
@@ -78,20 +82,20 @@ const createCardFooter = function () {
 };
 
 const addToDoCard = function (respondedTodo) {
-  const cardLayout = document.createElement('div');
-  cardLayout.className = 'cardLayout';
-  cardLayout.id = respondedTodo.id;
-  cardLayout.appendChild(createCardHeader(respondedTodo.title));
-  cardLayout.appendChild(createCardBody(respondedTodo.tasks));
-  cardLayout.appendChild(createCardFooter());
-  return cardLayout;
+  const todoListCard = document.createElement('div');
+  todoListCard.className = 'todo-list-card';
+  todoListCard.id = respondedTodo.id;
+  todoListCard.appendChild(createCardHeader(respondedTodo.title));
+  todoListCard.appendChild(createCardBody(respondedTodo.tasks));
+  todoListCard.appendChild(createCardFooter());
+  return todoListCard;
 };
 
 const loadAllToDo = function () {
   requestGet('/toDoLists', function () {
     if (this.status === 200) {
       const toDoList = JSON.parse(this.responseText);
-      const rightContainer = document.querySelector('.todo-list-container');
+      const rightContainer = document.querySelector('.todo-lists-container');
       toDoList.forEach(element => {
         rightContainer.appendChild(addToDoCard(element));
       });
@@ -108,7 +112,7 @@ const addToDoList = function () {
   const title = extractToDoTitle();
   requestPost('/addToDoList', {title}, function () {
     if (this.status === 200) {
-      const rightContainer = document.querySelector('.todo-list-container');
+      const rightContainer = document.querySelector('.todo-lists-container');
       const respondedToDo = JSON.parse(this.responseText);
       rightContainer.appendChild(addToDoCard(respondedToDo));
     }
@@ -116,7 +120,7 @@ const addToDoList = function () {
 };
 
 const deleteToDo = function () {
-  const toDoCard = event.target.parentElement.parentElement;
+  const toDoCard = event.target.parentElement.parentElement.parentElement;
   const data = {toDoListId: toDoCard.id};
   requestPost('/deleteToDoList', data, function () {
     toDoCard.remove();
@@ -146,7 +150,7 @@ const addNewTask = function () {
     const toDo = event.srcElement.parentElement.parentElement;
     requestPost('/addTask', {toDoListId: toDo.id, text}, function () {
       const {id, text, hasDone} = JSON.parse(this.responseText);
-      const cardBody = toDo.querySelector('.cardBody');
+      const cardBody = toDo.querySelector('.card-body');
       cardBody.appendChild(createTaskDiv(id, text, hasDone));
       cardBody.scrollTop = cardBody.scrollHeight;
     });

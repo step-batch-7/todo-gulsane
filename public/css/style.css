@@ -34,6 +34,7 @@ body {
   border-bottom: 1px solid black;
   font-size: 2vh;
 }
+
 #title-add-link{
   height: 60%;
 }
@@ -42,126 +43,114 @@ body {
   height: 100%;
 }
 
-.todo-list-container {
-  border: solid black 1px;
+.todo-lists-container {
+  border-top: solid black 1px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   overflow: scroll;
-  height: 70vh;
-  padding: 5vh;
+  height: 84vh;
 }
 
-.headTitle {
-  flex: 80%;
-  text-align: center;
-  font-weight: 300;
-  font-size: 25px;
-}
-
-.dustbin {
-  flex: 10%;
-  height: 16px;
-  width: 16px;
-  cursor: pointer;
-  margin-right: 1vw;
-  align-self: center;
-}
-
-.toDoForm {
-  height: 50vh;
-  width: 20vw;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-}
-
-.formHeader {
-  border-bottom: 1px solid black;
-  flex: 10%;
-}
-
-.formBody {
-  flex: 80%;
-  overflow-y: scroll;
-}
-
-.formFooter {
-  flex: 10%;
-}
-
-.taskArea {
-  display: flex;
-  justify-content: space-between;
-}
-
-.taskRemoverIcon {
-  height: 16px;
-  width: 16px;
-  margin-right: 15px;
-  align-self: center;
-}
-
-.cardLayout {
+.todo-list-card {
   border: 1px solid black;
   border-radius: 2%;
   height: 60vh;
   width: 25vw;
-  margin: 4vh;
+  margin: 2vh;
   display: flex;
   flex-direction: column;
 }
-.cardHeader {
+
+.card-header {
   border-bottom: 1px solid black;
-  flex: 10%;
   width: 100%;
   display: flex;
+  flex: 10%;
   justify-content: space-between;
+  align-items: center;
 }
-.cardBody {
+
+.card-heading {
+  text-align: center;
+  flex: 90%;
+  font-weight: 300;
+  font-size: 25px;
+  padding-left:1vw ;
+}
+
+.delete-todo-list-link {
+  height: 30px;
+  width: 25px;
+  cursor: pointer;
+  margin-right: 1vw;
+  align-self: center;
+  flex: 10%;
+}
+
+.delete-todo-list-link img{
+  height: 100%;
+  width: 100%;
+}
+
+.card-body {
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  flex: 80%;
+  flex: 85%;
 }
-.cardFooter {
-  flex: 10%;
-  display: flex;
-  margin: 1vh 1vw 3vh 1vw;
-}
-.cardFooter > input {
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  font-size: 18px;
-}
-.taskDiv {
+
+.task {
   margin-top: 1vh;
   display: flex;
   width: 100%;
   border: 1px solid transparent;
+  align-items: center;
 }
-.checkBox {
+
+ .check-box{
+  flex: 10%;
   margin-left: 1vw;
-  margin-right: 1vw;
-  align-self: center;
 }
-.checkBox > input {
+
+.check-box > input {
   cursor: pointer;
 }
-.taskName {
+
+.task-text {
   flex: 80%;
   font-size: 20px;
   font-weight: 200;
-  overflow: scroll;
   /* word-wrap: break-word; */
   word-break: break-all;
-  align-self: center;
   outline: none;
 }
-.taskDeleteIcon {
+
+.delete-task-link {
   margin-left: 1vw;
   margin-right: 1vw;
-  align-self: center;
+  height: 20px;
+  width: 20px;
   cursor: pointer;
+}
+
+.delete-task-link img{
+  height: 100%;
+  width: 100%;
+}
+
+.card-footer {
+  flex: 5%;
+  display: flex;
+  margin: 1vh 1vw 2vh 1vw;
+}
+
+.card-footer > input {
+  width: 100%;
+  height: 80%;
+  font-size: 18px;
+  font-weight: 300;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
 }
