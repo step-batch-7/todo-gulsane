@@ -13,7 +13,7 @@ const createCardHeader = function (title) {
   cardHeader.className = 'card-header';
   const headerDiv = document.createElement('div');
   headerDiv.className = 'card-heading';
-  const headTitle = document.createElement('h3');
+  const headTitle = document.createElement('h2');
   headTitle.innerText = title;
   headerDiv.appendChild(headTitle);
   cardHeader.appendChild(headerDiv);
