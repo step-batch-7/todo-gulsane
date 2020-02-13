@@ -75,6 +75,8 @@ body {
   text-align: center;
   flex: 90%;
   padding-left:1vw ;
+  outline: none;
+  word-break: break-all;
 }
 
 .delete-todo-list-link {

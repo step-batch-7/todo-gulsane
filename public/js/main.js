@@ -8,11 +8,14 @@ const createDustbin = function () {
   return div;
 };
 
+// eslint-disable-next-line max-statements
 const createCardHeader = function (title) {
   const cardHeader = document.createElement('div');
   cardHeader.className = 'card-header';
   const headerDiv = document.createElement('div');
   headerDiv.className = 'card-heading';
+  headerDiv.setAttribute('contentEditable', 'true');
+  headerDiv.onblur = changeTodoListTitle;
   const headTitle = document.createElement('h2');
   headTitle.innerText = title;
   headerDiv.appendChild(headTitle);
@@ -155,6 +158,14 @@ const addNewTask = function () {
       cardBody.scrollTop = cardBody.scrollHeight;
     });
   }
+};
+
+const changeTodoListTitle = function () {
+  const titleElement = event.target;
+  const newTitle = titleElement.innerText;
+  const toDoListElement = titleElement.parentElement.parentElement;
+  const toDoListId = toDoListElement.id;
+  requestPost('/changeToDoListTitle', {toDoListId, newTitle}, function () {});
 };
 
 const changeTaskTitle = function () {
