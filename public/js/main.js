@@ -222,8 +222,8 @@ const appendTask = function () {
   formBody.scrollTop = formBody.scrollHeight;
 };
 
-const isUnmatchedTitle = function (element, searchTitle) {
-  return !element.innerText.toLowerCase().includes(searchTitle.toLowerCase());
+const isUnmatched = function (element, searchKey) {
+  return !element.innerText.toLowerCase().includes(searchKey.toLowerCase());
 };
 
 const filterTitle = function () {
@@ -233,11 +233,26 @@ const filterTitle = function () {
   );
 
   cardHeadingElements.forEach((element) => {
-    if (searchTitle !== '' && isUnmatchedTitle(element, searchTitle)) {
+    if (searchTitle !== '' && isUnmatched(element, searchTitle)) {
       element.parentElement.parentElement.classList.add('hide');
       return;
     }
     element.parentElement.parentElement.classList.remove('hide');
+  });
+};
+
+const filterTask = function () {
+  const searchTask = document.querySelector('#search-task').value;
+  const tasksElements = Array.from(
+    document.querySelectorAll('.task-text')
+  );
+
+  tasksElements.forEach((element) => {
+    if (searchTask !== '' && isUnmatched(element, searchTask)) {
+      element.parentElement.classList.add('hide');
+      return;
+    }
+    element.parentElement.classList.remove('hide');
   });
 };
 
