@@ -1,9 +1,4 @@
 /* eslint-disable no-unused-vars */
-const getNewTitle = function () {
-  const title = document.querySelector('#new-title').value;
-  return title;
-};
-
 const createCardFooter = function () {
   const footerDiv = document.createElement('div');
   footerDiv.className = 'card-footer';

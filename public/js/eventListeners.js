@@ -90,9 +90,11 @@ const deleteToDoList = function () {
 };
 
 const addToDoList = function () {
-  const title = getNewTitle();
+  const titleContainer = document.querySelector('#new-title');
+  const title = titleContainer.value;
   requestPost('/addToDoList', {title}, function (toDoList) {
     prependToDoList(toDoList);
+    titleContainer.value = '';
   });
 };
 
