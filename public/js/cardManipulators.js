@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const createDustbin = function () {
   const div = document.createElement('div');
   div.className = 'delete-todo-list-link';
@@ -8,21 +9,6 @@ const createDustbin = function () {
   return div;
 };
 
-// eslint-disable-next-line max-statements
-const createCardHeader = function (title) {
-  const cardHeader = document.createElement('div');
-  cardHeader.className = 'card-header';
-  const headerDiv = document.createElement('div');
-  headerDiv.className = 'card-heading';
-  headerDiv.setAttribute('contentEditable', 'true');
-  headerDiv.onblur = changeTodoListTitle;
-  const headTitle = document.createElement('h2');
-  headTitle.innerText = title;
-  headerDiv.appendChild(headTitle);
-  cardHeader.appendChild(headerDiv);
-  cardHeader.appendChild(createDustbin());
-  return cardHeader;
-};
 
 const createCheckBox = function (status) {
   const div = document.createElement('div');
@@ -103,26 +89,9 @@ const createTask = function (task) {
   return taskArea;
 };
 
-const addToDoCard = function (respondedTodo) {
-  const todoListCard = document.createElement('div');
-  todoListCard.className = 'todo-list-card';
-  todoListCard.id = respondedTodo.id;
-  todoListCard.appendChild(createCardHeader(respondedTodo.title));
-  todoListCard.appendChild(createCardBody(respondedTodo.tasks));
-  todoListCard.appendChild(createCardFooter());
-  return todoListCard;
-};
-
-const generateAllToDoList = function (toDoLists) {
-  const toDoListsContainer = document.querySelector('.todo-lists-container');
-  toDoLists.forEach(toDoList => {
-    toDoListsContainer.prepend(addToDoCard(toDoList));
-  });
-};
-
 const prependToDoList = function (toDoList) {
   const toDoListsContainer = document.querySelector('.todo-lists-container');
-  toDoListsContainer.prepend(addToDoCard(toDoList));
+  toDoListsContainer.prepend(addToDoListCard(toDoList));
 };
 
 const getNewTitle = function () {
@@ -135,4 +104,40 @@ const appendTask = function (toDoListElement, task) {
   const cardBody = toDoListElement.querySelector('.card-body');
   cardBody.appendChild(createTaskDiv(id, text, hasDone));
   cardBody.scrollTop = cardBody.scrollHeight;
+};
+
+const createHeadingDiv = function (title) {
+  const headingDiv = document.createElement('div');
+  headingDiv.className = 'card-heading';
+  headingDiv.setAttribute('contentEditable', 'true');
+  headingDiv.onblur = changeTodoListTitle;
+  const headTitle = document.createElement('h2');
+  headTitle.innerText = title;
+  headingDiv.appendChild(headTitle);
+  return headingDiv;
+};
+
+const createCardHeader = function (title) {
+  const cardHeader = document.createElement('div');
+  cardHeader.className = 'card-header';
+  cardHeader.appendChild(createHeadingDiv(title));
+  cardHeader.appendChild(createDustbin());
+  return cardHeader;
+};
+
+const addToDoListCard = function (toDoList) {
+  const todoListCard = document.createElement('div');
+  todoListCard.className = 'todo-list-card';
+  todoListCard.id = toDoList.id;
+  todoListCard.appendChild(createCardHeader(toDoList.title));
+  todoListCard.appendChild(createCardBody(toDoList.tasks));
+  todoListCard.appendChild(createCardFooter());
+  return todoListCard;
+};
+
+const generateAllToDoList = function (toDoLists) {
+  const toDoListsContainer = document.querySelector('.todo-lists-container');
+  toDoLists.forEach(toDoList => {
+    toDoListsContainer.prepend(addToDoListCard(toDoList));
+  });
 };
