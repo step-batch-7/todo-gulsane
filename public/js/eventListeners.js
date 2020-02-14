@@ -27,8 +27,8 @@ const addNewTask = function () {
     const text = event.srcElement.value;
     event.srcElement.value = '';
     const toDo = event.srcElement.parentElement.parentElement;
-    requestPost('/addTask', {toDoListId: toDo.id, text}, function () {
-      const {id, text, hasDone} = JSON.parse(this.responseText);
+    requestPost('/addTask', {toDoListId: toDo.id, text}, function (task) {
+      const {id, text, hasDone} = task;
       const cardBody = toDo.querySelector('.card-body');
       cardBody.appendChild(createTaskDiv(id, text, hasDone));
       cardBody.scrollTop = cardBody.scrollHeight;
@@ -92,61 +92,12 @@ const filterTask = function () {
   });
 };
 
-const isCreatedStatus = function (status) {
-  return status === 201;
-};
-
-const isJSON = function (contentType) {
-  return contentType === 'application/json';
-};
-
-const isValidPostResponse = function (res) {
-  const isOk = isCreatedStatus(res.status);
-  const isJSONContentType = isJSON(res.getResponseHeader('Content-Type'));
-  return isOk && isJSONContentType;
-};
-
-const requestPost = (url, data, callBack) => {
-  const req = new XMLHttpRequest();
-  req.open('POST', url);
-  req.onload = function () {
-    if (isValidPostResponse(this)) {
-      callBack(JSON.parse(this.responseText));
-    }
-  };
-  req.setRequestHeader('Content-Type', 'application/json');
-  const requestBody = JSON.stringify(data);
-  req.send(requestBody);
-};
-
 const addToDoList = function () {
   const title = getNewTitle();
   requestPost('/addToDoList', {title}, function (toDoList) {
     prependToDoList(toDoList);
   });
 };
-
-const isOkStatus = function (status) {
-  return status === 200;
-};
-
-const isValidGetResponse = function (res) {
-  const isOk = isOkStatus(res.status);
-  const isJSONContentType = isJSON(res.getResponseHeader('Content-Type'));
-  return isOk && isJSONContentType;
-};
-
-const requestGet = function (url, callBack) {
-  const req = new XMLHttpRequest();
-  req.open('GET', url);
-  req.onload = function () {
-    if (isValidGetResponse(this)) {
-      callBack(JSON.parse(this.responseText));
-    }
-  };
-  req.send();
-};
-
 
 const loadAllToDoList = function () {
   requestGet('/toDoLists', function (toDoLists) {

@@ -24,7 +24,7 @@ describe('GET', () => {
       req(app)
         .get('/toDoLists')
         .expect(200, done)
-        .expect('Content-Type', 'application/json');
+        .expect('Content-Type', 'application/json; charset=utf-8');
     });
   });
 });
@@ -52,7 +52,7 @@ describe('POST', () => {
         .set('Content-Type', 'application/json')
         .send('{"title":"Home Work"}')
         .expect(200, done)
-        .expect('Content-Type', 'application/json')
+        .expect('Content-Type', 'application/json; charset=utf-8')
         .expect('{"id":"tl-3","title":"Home Work","tasks":[]}');
     });
   });
