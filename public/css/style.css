@@ -92,6 +92,9 @@ body {
   text-align: center;
   flex: 90%;
   padding-left:1vw ;
+}
+
+.card-heading > h2{
   outline: none;
   word-break: break-all;
 }

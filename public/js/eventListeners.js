@@ -48,9 +48,15 @@ const changeTaskText = function () {
 const changeTodoListTitle = function () {
   const titleElement = event.target;
   const newTitle = titleElement.innerText;
-  const toDoListElement = titleElement.parentElement.parentElement;
+  const toDoListElement = titleElement.parentElement.parentElement.parentElement;
   const toDoListId = toDoListElement.id;
   requestPost('/changeToDoListTitle', {toDoListId, newTitle}, () => {});
+};
+
+const blurOnEnter = function () {
+  if (event.key === 'Enter') {
+    event.target.blur();
+  }
 };
 
 const toggleTaskStatus = function () {

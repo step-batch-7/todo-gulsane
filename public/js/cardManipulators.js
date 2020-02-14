@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 const createCardFooter = function () {
   const footerDiv = document.createElement('div');
@@ -20,12 +21,13 @@ const createTaskDeleteIcon = function () {
 };
 
 const createTaskText = function (text) {
-  const taskName = document.createElement('div');
-  taskName.className = 'task-text';
-  taskName.setAttribute('contentEditable', true);
-  taskName.onblur = changeTaskText;
-  taskName.innerText = text;
-  return taskName;
+  const taskText = document.createElement('div');
+  taskText.className = 'task-text';
+  taskText.setAttribute('contentEditable', true);
+  taskText.onblur = changeTaskText;
+  taskText.onkeypress = blurOnEnter;
+  taskText.innerText = text;
+  return taskText;
 };
 
 const createCheckBox = function (status) {
@@ -72,9 +74,10 @@ const createListDeleteIcon = function () {
 const createHeadingDiv = function (title) {
   const headingDiv = document.createElement('div');
   headingDiv.className = 'card-heading';
-  headingDiv.setAttribute('contentEditable', 'true');
-  headingDiv.onblur = changeTodoListTitle;
   const headTitle = document.createElement('h2');
+  headTitle.setAttribute('contentEditable', 'true');
+  headTitle.onblur = changeTodoListTitle;
+  headTitle.onkeypress = blurOnEnter;
   headTitle.innerText = title;
   headingDiv.appendChild(headTitle);
   return headingDiv;
