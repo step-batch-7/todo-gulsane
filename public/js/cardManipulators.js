@@ -1,51 +1,56 @@
 /* eslint-disable no-unused-vars */
-const createDustbin = function () {
-  const div = document.createElement('div');
-  div.className = 'delete-todo-list-link';
-  const deleteLink = document.createElement('img');
-  deleteLink.setAttribute('src', 'images/deleteToDoList.png');
-  deleteLink.onclick = deleteToDoList;
-  div.appendChild(deleteLink);
-  return div;
+const getNewTitle = function () {
+  const title = document.querySelector('#new-title').value;
+  return title;
 };
 
-
-const createCheckBox = function (status) {
-  const div = document.createElement('div');
-  const checkBox = document.createElement('input');
-  div.className = 'check-box';
-  checkBox.setAttribute('type', 'checkbox');
-  checkBox.checked = status;
-  checkBox.onclick = toggleTaskStatus;
-  div.appendChild(checkBox);
-  return div;
-};
-
-const createTaskName = function (task) {
-  const taskName = document.createElement('div');
-  taskName.className = 'task-text';
-  taskName.setAttribute('contentEditable', true);
-  taskName.onblur = changeTaskTitle;
-  taskName.innerText = task;
-  return taskName;
+const createCardFooter = function () {
+  const footerDiv = document.createElement('div');
+  footerDiv.className = 'card-footer';
+  const taskInput = document.createElement('input');
+  taskInput.setAttribute('placeholder', 'Add Task...');
+  taskInput.onkeydown = addTask;
+  footerDiv.appendChild(taskInput);
+  return footerDiv;
 };
 
 const createTaskDeleteIcon = function () {
-  const taskDeleteIcon = document.createElement('div');
-  taskDeleteIcon.className = 'delete-task-link';
-  taskDeleteIcon.onclick = deleteTask;
-  const icon = document.createElement('img');
-  icon.setAttribute('src', 'images/deleteTask.png');
-  taskDeleteIcon.appendChild(icon);
-  return taskDeleteIcon;
+  const deleteIconDiv = document.createElement('div');
+  deleteIconDiv.className = 'delete-task-link';
+  deleteIconDiv.onclick = deleteTask;
+  const deleteIcon = document.createElement('img');
+  deleteIcon.setAttribute('src', 'images/deleteTask.png');
+  deleteIconDiv.appendChild(deleteIcon);
+  return deleteIconDiv;
 };
 
-const createTaskDiv = function (id, title, status) {
+const createTaskText = function (text) {
+  const taskName = document.createElement('div');
+  taskName.className = 'task-text';
+  taskName.setAttribute('contentEditable', true);
+  taskName.onblur = changeTaskText;
+  taskName.innerText = text;
+  return taskName;
+};
+
+const createCheckBox = function (status) {
+  const checkBoxDiv = document.createElement('div');
+  const checkBox = document.createElement('input');
+  checkBoxDiv.className = 'check-box';
+  checkBox.setAttribute('type', 'checkbox');
+  checkBox.checked = status;
+  checkBox.onclick = toggleTaskStatus;
+  checkBoxDiv.appendChild(checkBox);
+  return checkBoxDiv;
+};
+
+const createTaskDiv = function (task) {
+  const {id, text, hasDone} = task;
   const taskDiv = document.createElement('div');
   taskDiv.className = 'task';
   taskDiv.id = id;
-  taskDiv.appendChild(createCheckBox(status));
-  taskDiv.appendChild(createTaskName(title));
+  taskDiv.appendChild(createCheckBox(hasDone));
+  taskDiv.appendChild(createTaskText(text));
   taskDiv.appendChild(createTaskDeleteIcon());
   return taskDiv;
 };
@@ -53,57 +58,20 @@ const createTaskDiv = function (id, title, status) {
 const createCardBody = function (tasks) {
   const cardBody = document.createElement('div');
   cardBody.className = 'card-body';
-  tasks.forEach(function (task) {
-    cardBody.appendChild(createTaskDiv(task.id, task.text, task.hasDone));
+  tasks.forEach((task) => {
+    cardBody.appendChild(createTaskDiv(task));
   });
   return cardBody;
 };
 
-const createCardFooter = function () {
-  const footer = document.createElement('div');
-  footer.className = 'card-footer';
-  const input = document.createElement('input');
-  input.setAttribute('placeholder', 'Add Task...');
-  input.className = 'newTask';
-  input.onkeydown = addTask;
-  footer.appendChild(input);
-  return footer;
-};
-
-const createTaskRemoverIcon = function () {
-  const icon = document.createElement('img');
-  icon.className = 'taskRemoverIcon';
-  icon.setAttribute('src', 'images/delete.png');
-  icon.onclick = removeTask;
-  return icon;
-};
-
-const createTask = function (task) {
-  const taskArea = document.createElement('div');
-  taskArea.className = 'taskArea';
-  const paragraph = document.createElement('p');
-  paragraph.className = 'F_tasks';
-  paragraph.innerText = task;
-  taskArea.appendChild(paragraph);
-  taskArea.appendChild(createTaskRemoverIcon());
-  return taskArea;
-};
-
-const prependToDoList = function (toDoList) {
-  const toDoListsContainer = document.querySelector('.todo-lists-container');
-  toDoListsContainer.prepend(addToDoListCard(toDoList));
-};
-
-const getNewTitle = function () {
-  const title = document.querySelector('#new-title').value;
-  return title;
-};
-
-const appendTask = function (toDoListElement, task) {
-  const {id, text, hasDone} = task;
-  const cardBody = toDoListElement.querySelector('.card-body');
-  cardBody.appendChild(createTaskDiv(id, text, hasDone));
-  cardBody.scrollTop = cardBody.scrollHeight;
+const createListDeleteIcon = function () {
+  const div = document.createElement('div');
+  div.className = 'delete-todo-list-link';
+  const deleteLink = document.createElement('img');
+  deleteLink.setAttribute('src', 'images/deleteToDoList.png');
+  deleteLink.onclick = deleteToDoList;
+  div.appendChild(deleteLink);
+  return div;
 };
 
 const createHeadingDiv = function (title) {
@@ -121,7 +89,7 @@ const createCardHeader = function (title) {
   const cardHeader = document.createElement('div');
   cardHeader.className = 'card-header';
   cardHeader.appendChild(createHeadingDiv(title));
-  cardHeader.appendChild(createDustbin());
+  cardHeader.appendChild(createListDeleteIcon());
   return cardHeader;
 };
 
@@ -140,4 +108,15 @@ const generateAllToDoList = function (toDoLists) {
   toDoLists.forEach(toDoList => {
     toDoListsContainer.prepend(addToDoListCard(toDoList));
   });
+};
+
+const prependToDoList = function (toDoList) {
+  const toDoListsContainer = document.querySelector('.todo-lists-container');
+  toDoListsContainer.prepend(addToDoListCard(toDoList));
+};
+
+const appendTask = function (toDoListElement, task) {
+  const cardBody = toDoListElement.querySelector('.card-body');
+  cardBody.appendChild(createTaskDiv(task));
+  cardBody.scrollTop = cardBody.scrollHeight;
 };

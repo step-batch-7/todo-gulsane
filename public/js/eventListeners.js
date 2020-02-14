@@ -36,7 +36,7 @@ const filterTitle = function () {
   });
 };
 
-const changeTaskTitle = function () {
+const changeTaskText = function () {
   const taskName = event.target;
   const newText = taskName.innerText;
   const taskDiv = taskName.parentElement;
