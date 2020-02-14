@@ -123,6 +123,16 @@ const addToDoCard = function (respondedTodo) {
 const generateAllToDoList = function (toDoLists) {
   const toDoListsContainer = document.querySelector('.todo-lists-container');
   toDoLists.forEach(toDoList => {
-    toDoListsContainer.appendChild(addToDoCard(toDoList));
+    toDoListsContainer.prepend(addToDoCard(toDoList));
   });
+};
+
+const prependToDoList = function (toDoList) {
+  const toDoListsContainer = document.querySelector('.todo-lists-container');
+  toDoListsContainer.prepend(addToDoCard(toDoList));
+};
+
+const getNewTitle = function () {
+  const title = document.querySelector('#new-title').value;
+  return title;
 };
