@@ -1,24 +1,4 @@
-const addToDoCard = function (respondedTodo) {
-  const todoListCard = document.createElement('div');
-  todoListCard.className = 'todo-list-card';
-  todoListCard.id = respondedTodo.id;
-  todoListCard.appendChild(createCardHeader(respondedTodo.title));
-  todoListCard.appendChild(createCardBody(respondedTodo.tasks));
-  todoListCard.appendChild(createCardFooter());
-  return todoListCard;
-};
 
-const loadAllToDo = function () {
-  requestGet('/toDoLists', function () {
-    if (this.status === 200) {
-      const toDoList = JSON.parse(this.responseText);
-      const rightContainer = document.querySelector('.todo-lists-container');
-      toDoList.forEach(element => {
-        rightContainer.appendChild(addToDoCard(element));
-      });
-    }
-  });
-};
 
 const extractToDoTitle = function () {
   const title = document.querySelector('#new-title').value;
@@ -91,17 +71,7 @@ const changeTaskTitle = function () {
   requestPost('/changeTaskText', {toDoListId, taskId, newText}, function () {});
 };
 
-const request = function (method, url, data, callBack) {
-  const xhr = new XMLHttpRequest();
-  xhr.open(method, url);
-  xhr.onload = callBack;
-  if (method === 'POST') {
-    xhr.setRequestHeader('Content-Type', 'application/json');
-  }
-  xhr.send(JSON.stringify(data));
-};
 
-const requestGet = (url, callBack) => request('GET', url, {}, callBack);
 const requestPost = (url, data, callBack) =>
   request('POST', url, data, callBack);
 
@@ -144,7 +114,45 @@ const filterTask = function () {
   });
 };
 
-const main = () => {
-  loadAllToDo();
+const request = function (method, url, data, callBack) {
+  const xhr = new XMLHttpRequest();
+  xhr.open(method, url);
+  xhr.onload = callBack;
+  if (method === 'POST') {
+    xhr.setRequestHeader('Content-Type', 'application/json');
+  }
+  xhr.send(JSON.stringify(data));
 };
-window.onload = main;
+
+const isOkStatus = function (status) {
+  return status === 200;
+};
+
+const isJSON = function (contentType) {
+  return contentType === 'application/json';
+};
+
+const isValidResponse = function (res) {
+  const isOk = isOkStatus(res.status);
+  const isJSONContentType = isJSON(res.getResponseHeader('Content-Type'));
+  return isOk && isJSONContentType;
+};
+
+const requestGet = function (url, callBack) {
+  const req = new XMLHttpRequest();
+  req.open('GET', url);
+  req.onload = function () {
+    if (isValidResponse(this)) {
+      callBack(JSON.parse(this.responseText));
+    }
+  };
+  req.send();
+};
+
+const loadAllToDoList = function () {
+  requestGet('/toDoLists', function (toDoLists) {
+    generateAllToDoList(toDoLists);
+  });
+};
+
+window.onload = loadAllToDoList;

@@ -109,3 +109,20 @@ const appendTask = function () {
   formBody.append(createTask(task));
   formBody.scrollTop = formBody.scrollHeight;
 };
+
+const addToDoCard = function (respondedTodo) {
+  const todoListCard = document.createElement('div');
+  todoListCard.className = 'todo-list-card';
+  todoListCard.id = respondedTodo.id;
+  todoListCard.appendChild(createCardHeader(respondedTodo.title));
+  todoListCard.appendChild(createCardBody(respondedTodo.tasks));
+  todoListCard.appendChild(createCardFooter());
+  return todoListCard;
+};
+
+const generateAllToDoList = function (toDoLists) {
+  const toDoListsContainer = document.querySelector('.todo-lists-container');
+  toDoLists.forEach(toDoList => {
+    toDoListsContainer.appendChild(addToDoCard(toDoList));
+  });
+};
