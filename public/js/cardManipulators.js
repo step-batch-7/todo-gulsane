@@ -79,7 +79,7 @@ const createCardFooter = function () {
   const input = document.createElement('input');
   input.setAttribute('placeholder', 'Add Task...');
   input.className = 'newTask';
-  input.onkeydown = addNewTask;
+  input.onkeydown = addTask;
   footer.appendChild(input);
   return footer;
 };
@@ -101,13 +101,6 @@ const createTask = function (task) {
   taskArea.appendChild(paragraph);
   taskArea.appendChild(createTaskRemoverIcon());
   return taskArea;
-};
-
-const appendTask = function () {
-  const formBody = document.querySelector('.formBody');
-  const task = document.querySelector('#F_inputTask').value;
-  formBody.append(createTask(task));
-  formBody.scrollTop = formBody.scrollHeight;
 };
 
 const addToDoCard = function (respondedTodo) {
@@ -135,4 +128,11 @@ const prependToDoList = function (toDoList) {
 const getNewTitle = function () {
   const title = document.querySelector('#new-title').value;
   return title;
+};
+
+const appendTask = function (toDoListElement, task) {
+  const {id, text, hasDone} = task;
+  const cardBody = toDoListElement.querySelector('.card-body');
+  cardBody.appendChild(createTaskDiv(id, text, hasDone));
+  cardBody.scrollTop = cardBody.scrollHeight;
 };

@@ -14,20 +14,6 @@ const toggleTaskStatus = function () {
   requestPost('/toggleTaskStatus', {toDoListId, taskId}, function () {});
 };
 
-const addNewTask = function () {
-  if (event.key === 'Enter') {
-    const text = event.srcElement.value;
-    event.srcElement.value = '';
-    const toDo = event.srcElement.parentElement.parentElement;
-    requestPost('/addTask', {toDoListId: toDo.id, text}, function (task) {
-      const {id, text, hasDone} = task;
-      const cardBody = toDo.querySelector('.card-body');
-      cardBody.appendChild(createTaskDiv(id, text, hasDone));
-      cardBody.scrollTop = cardBody.scrollHeight;
-    });
-  }
-};
-
 const changeTodoListTitle = function () {
   const titleElement = event.target;
   const newTitle = titleElement.innerText;
@@ -82,6 +68,18 @@ const filterTask = function () {
     }
     element.parentElement.classList.remove('hide');
   });
+};
+
+const addTask = function () {
+  if (event.key === 'Enter') {
+    const text = event.target.value;
+    event.target.value = '';
+    const toDoListElement = event.target.parentElement.parentElement;
+    const toDoListId = toDoListElement.id;
+    requestPost('/addTask', {toDoListId, text}, function (task) {
+      appendTask(toDoListElement, task);
+    });
+  }
 };
 
 const deleteToDoList = function () {
