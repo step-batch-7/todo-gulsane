@@ -1,58 +1,9 @@
-const deleteTask = function () {
-  const taskDiv = event.target.parentElement.parentElement;
-  const taskId = taskDiv.id;
-  const toDoListId = taskDiv.parentElement.parentElement.id;
-  requestPost('/deleteTask', {toDoListId, taskId}, function () {
-    taskDiv.remove();
-  });
-};
-
-const toggleTaskStatus = function () {
-  const taskDiv = event.target.parentElement.parentElement;
-  const taskId = taskDiv.id;
-  const toDoListId = taskDiv.parentElement.parentElement.id;
-  requestPost('/toggleTaskStatus', {toDoListId, taskId}, function () {});
-};
-
-const changeTodoListTitle = function () {
-  const titleElement = event.target;
-  const newTitle = titleElement.innerText;
-  const toDoListElement = titleElement.parentElement.parentElement;
-  const toDoListId = toDoListElement.id;
-  requestPost('/changeToDoListTitle', {toDoListId, newTitle}, function () {});
-};
-
-const changeTaskTitle = function () {
-  const taskName = event.target;
-  const newText = taskName.innerText;
-  const taskDiv = taskName.parentElement;
-  const taskId = taskDiv.id;
-  const toDoListId = taskDiv.parentElement.parentElement.id;
-  requestPost('/changeTaskText', {toDoListId, taskId, newText}, function () {});
-};
-
-const removeTask = function () {
-  const taskArea = event.target.parentElement;
-  taskArea.remove();
+const isEmpty = function (searchKey) {
+  return searchKey === '';
 };
 
 const isUnmatched = function (element, searchKey) {
   return !element.innerText.toLowerCase().includes(searchKey.toLowerCase());
-};
-
-const filterTitle = function () {
-  const searchTitle = document.querySelector('#search-title').value;
-  const cardHeadingElements = Array.from(
-    document.querySelectorAll('.card-heading')
-  );
-
-  cardHeadingElements.forEach((element) => {
-    if (searchTitle !== '' && isUnmatched(element, searchTitle)) {
-      element.parentElement.parentElement.classList.add('hide');
-      return;
-    }
-    element.parentElement.parentElement.classList.remove('hide');
-  });
 };
 
 const filterTask = function () {
@@ -62,11 +13,59 @@ const filterTask = function () {
   );
 
   tasksElements.forEach((element) => {
-    if (searchTask !== '' && isUnmatched(element, searchTask)) {
+    if (!isEmpty(searchTask) && isUnmatched(element, searchTask)) {
       element.parentElement.classList.add('hide');
       return;
     }
     element.parentElement.classList.remove('hide');
+  });
+};
+
+const filterTitle = function () {
+  const searchTitle = document.querySelector('#search-title').value;
+  const cardHeadingElements = Array.from(
+    document.querySelectorAll('.card-heading')
+  );
+
+  cardHeadingElements.forEach((element) => {
+    if (!isEmpty(searchTitle) && isUnmatched(element, searchTitle)) {
+      element.parentElement.parentElement.classList.add('hide');
+      return;
+    }
+    element.parentElement.parentElement.classList.remove('hide');
+  });
+};
+
+const changeTaskTitle = function () {
+  const taskName = event.target;
+  const newText = taskName.innerText;
+  const taskDiv = taskName.parentElement;
+  const taskId = taskDiv.id;
+  const toDoListId = taskDiv.parentElement.parentElement.id;
+  requestPost('/changeTaskText', {toDoListId, taskId, newText}, () => {});
+};
+
+const changeTodoListTitle = function () {
+  const titleElement = event.target;
+  const newTitle = titleElement.innerText;
+  const toDoListElement = titleElement.parentElement.parentElement;
+  const toDoListId = toDoListElement.id;
+  requestPost('/changeToDoListTitle', {toDoListId, newTitle}, () => {});
+};
+
+const toggleTaskStatus = function () {
+  const taskDiv = event.target.parentElement.parentElement;
+  const taskId = taskDiv.id;
+  const toDoListId = taskDiv.parentElement.parentElement.id;
+  requestPost('/toggleTaskStatus', {toDoListId, taskId}, () => {});
+};
+
+const deleteTask = function () {
+  const taskDiv = event.target.parentElement.parentElement;
+  const taskId = taskDiv.id;
+  const toDoListId = taskDiv.parentElement.parentElement.id;
+  requestPost('/deleteTask', {toDoListId, taskId}, function () {
+    taskDiv.remove();
   });
 };
 
