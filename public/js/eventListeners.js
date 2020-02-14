@@ -1,11 +1,3 @@
-const deleteToDo = function () {
-  const toDoCard = event.target.parentElement.parentElement.parentElement;
-  const data = {toDoListId: toDoCard.id};
-  requestPost('/deleteToDoList', data, function () {
-    toDoCard.remove();
-  });
-};
-
 const deleteTask = function () {
   const taskDiv = event.target.parentElement.parentElement;
   const taskId = taskDiv.id;
@@ -89,6 +81,14 @@ const filterTask = function () {
       return;
     }
     element.parentElement.classList.remove('hide');
+  });
+};
+
+const deleteToDoList = function () {
+  const toDoListCard = event.target.parentElement.parentElement.parentElement;
+  const data = {toDoListId: toDoListCard.id};
+  requestPost('/deleteToDoList', data, function () {
+    toDoListCard.remove();
   });
 };
 

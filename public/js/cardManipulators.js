@@ -3,7 +3,7 @@ const createDustbin = function () {
   div.className = 'delete-todo-list-link';
   const deleteLink = document.createElement('img');
   deleteLink.setAttribute('src', 'images/deleteToDoList.png');
-  deleteLink.onclick = deleteToDo;
+  deleteLink.onclick = deleteToDoList;
   div.appendChild(deleteLink);
   return div;
 };
