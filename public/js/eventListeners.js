@@ -98,6 +98,12 @@ const addToDoList = function () {
   });
 };
 
+const createToDoList = function () {
+  if (event.key === 'Enter') {
+    addToDoList();
+  }
+};
+
 const loadAllToDoList = function () {
   requestGet('/toDoLists', function (toDoLists) {
     generateAllToDoList(toDoLists);
