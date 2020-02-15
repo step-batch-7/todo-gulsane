@@ -135,7 +135,8 @@ describe('POST for signup and login ', () => {
         .post('/signup')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send('name=Gulshan&username=gulsane&password=1234')
-        .expect(200, done);
+        .expect(302, done)
+        .expect(/Redirecting to login.html/);
     });
   });
 });
