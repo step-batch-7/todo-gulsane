@@ -118,3 +118,24 @@ describe('POST', () => {
     });
   });
 });
+
+describe('POST for signup and login ', () => {
+  beforeEach(() => {
+    const sampleData = '[]';
+    fs.writeFileSync('./test/resources/userList.json', sampleData);
+  });
+
+  afterEach(() => {
+    fs.unlinkSync('./test/resources/userList.json');
+  });
+
+  context('addUser', () => {
+    it('should add the user details to the userList.json', (done) => {
+      req(app)
+        .post('/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send('name=Gulshan&username=gulsane&password=1234')
+        .expect(200, done);
+    });
+  });
+});
