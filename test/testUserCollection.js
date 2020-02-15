@@ -70,4 +70,30 @@ describe('UserCollection', () => {
       userCollection.save(userWriter);
     });
   });
+
+  context('verifyUser()', () => {
+    it('should return false if username not found', () => {
+      const userList = [
+        {name: 'Gulshan Kumar', username: 'gulshane', password: '1234'}
+      ];
+      const userCollection = UserCollection.load(userList);
+      assert.strictEqual(userCollection.verifyUser('armaan', '1234'), false);
+    });
+
+    it('should return false if password not matched', () => {
+      const userList = [
+        {name: 'Gulshan Kumar', username: 'gulshane', password: '1234'}
+      ];
+      const userCollection = UserCollection.load(userList);
+      assert.strictEqual(userCollection.verifyUser('gulshane', 'hel12'), false);
+    });
+
+    it('should return true if user is valid', () => {
+      const userList = [
+        {name: 'Gulshan Kumar', username: 'gulshane', password: '1234'}
+      ];
+      const userCollection = UserCollection.load(userList);
+      assert.strictEqual(userCollection.verifyUser('gulshane', '1234'), true);
+    });
+  });
 });
