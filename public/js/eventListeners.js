@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 const isEmpty = function (searchKey) {
   return searchKey === '';
 };
@@ -6,19 +8,46 @@ const isUnmatched = function (element, searchKey) {
   return !element.innerText.toLowerCase().includes(searchKey.toLowerCase());
 };
 
+const isTaskAvailable = function (cardElement, searchTask) {
+  const tasksElements = Array.from(
+    cardElement.querySelectorAll('.task-text')
+  );
+  return tasksElements.some((task) => !isUnmatched(task, searchTask));
+};
+
 const filterTask = function () {
   const searchTask = document.querySelector('#search-task').value;
-  const tasksElements = Array.from(
-    document.querySelectorAll('.task-text')
+
+  const cardElements = Array.from(
+    document.querySelectorAll('.todo-list-card')
   );
 
-  tasksElements.forEach((element) => {
-    if (!isEmpty(searchTask) && isUnmatched(element, searchTask)) {
-      element.parentElement.classList.add('hide');
-      return;
+  cardElements.forEach((cardElement) => {
+    if (isTaskAvailable(cardElement, searchTask)) {
+      cardElement.classList.remove('hide');
+
+      const tasksElements = Array.from(
+        cardElement.querySelectorAll('.task-text')
+      );
+
+      tasksElements.forEach((task) => {
+        if (!isEmpty(searchTask) && isUnmatched(task, searchTask)) {
+          task.parentElement.classList.add('hide');
+          return;
+        }
+        task.parentElement.classList.remove('hide');
+      });
+    } else {
+      cardElement.classList.add('hide');
     }
-    element.parentElement.classList.remove('hide');
+
   });
+};
+
+const resetTitleSearchBar = function () {
+  const searchTitleElement = document.querySelector('#search-title');
+  searchTitleElement.value = '';
+  filterTitle();
 };
 
 const filterTitle = function () {
