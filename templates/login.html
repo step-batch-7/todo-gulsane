@@ -3,19 +3,23 @@
 
 <head>
   <title>Login</title>
+  <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
-  <div>
-    <form action="login" method="POST">
+  <div class="login-page">
+    <form class="login-form" action="login" method="POST">
+      <h2>LOG IN</h2>
       <label class="message">__message__</label>
-      <label for="username">User Name:</label>
-      <input type="text" name="username" required>
-      <label for="password">Password:</label>
-      <input type="password" name="password" required>
-      <input type="submit" value="Login">
-      <a href="signup.html">Create New Account</a>
+      <br>
+      <input type="text" name="username" placeholder="User Name" required>
+      <br>
+      <input type="password" name="password" placeholder="Password" required>
+      <br>
+      <button type="submit">LogIn</button>
+      <br>
     </form>
+    <a href="signup.html">Create New Account</a>
   </div>
 </body>
 
