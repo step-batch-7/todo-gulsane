@@ -145,4 +145,4 @@ const loadAllToDoList = function () {
   });
 };
 
-// window.onload = loadAllToDoList;
+window.onload = loadAllToDoList;
