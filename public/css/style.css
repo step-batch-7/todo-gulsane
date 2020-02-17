@@ -69,6 +69,7 @@ body {
 }
 
 #title-add-link img{
+  cursor: pointer;
   height: 100%;
 }
 .search-bars{
@@ -120,7 +121,8 @@ body {
 
 .card-heading > h2{
   outline: none;
-  word-break: break-all;
+  word-wrap: break-word;
+  font-weight: 400;
 }
 
 .delete-todo-list-link {
@@ -166,6 +168,7 @@ body {
   font-size: 20px;
   font-weight: 200;
   word-wrap: break-word;
+  word-break:break-all ;
   outline: none;
 }
 .task:hover{
@@ -199,6 +202,12 @@ body {
   border: none;
   outline: none;
   border-bottom: 1px solid black;
+}
+
+.card-footer img {
+  height:82%;
+  width: 6%;
+  cursor: pointer;
 }
 
 .hide{

@@ -1,12 +1,20 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
+const createTaskAddIcon = function () {
+  const taskAddIcon = document.createElement('img');
+  taskAddIcon.setAttribute('src', 'images/addToDoList.png');
+  taskAddIcon.onclick = addTask;
+  return taskAddIcon;
+};
+
 const createCardFooter = function () {
   const footerDiv = document.createElement('div');
   footerDiv.className = 'card-footer';
   const taskInput = document.createElement('input');
   taskInput.setAttribute('placeholder', 'Add Task...');
-  taskInput.onkeydown = addTask;
+  taskInput.onkeydown = createTask;
   footerDiv.appendChild(taskInput);
+  footerDiv.appendChild(createTaskAddIcon());
   return footerDiv;
 };
 

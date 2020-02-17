@@ -105,17 +105,21 @@ const deleteTask = function () {
 };
 
 const addTask = function () {
-  if (event.key === 'Enter') {
-    const text = event.target.value;
-    if (text === '') {
-      return;
-    }
-    event.target.value = '';
-    const toDoListElement = event.target.parentElement.parentElement;
+  const inputTask = event.target.parentElement.querySelector('input');
+  const text = inputTask.value;
+  if (text) {
+    inputTask.value = '';
+    const toDoListElement = inputTask.parentElement.parentElement;
     const toDoListId = toDoListElement.id;
     requestPost('/addTask', {toDoListId, text}, function (task) {
       appendTask(toDoListElement, task);
     });
+  }
+};
+
+const createTask = function () {
+  if (event.key === 'Enter') {
+    addTask();
   }
 };
 
