@@ -1,4 +1,4 @@
-const {app} = require('./lib/handlers.js');
+const {app} = require('./lib/routes.js');
 const port = process.argv[2] || 4000;
 
 const main = port => {
