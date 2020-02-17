@@ -17,8 +17,9 @@ const requestPost = (url, data, callBack) => {
   req.open('POST', url);
   req.onload = function () {
     if (isValidResponse(this)) {
-      callBack(JSON.parse(this.responseText));
+      return callBack(JSON.parse(this.responseText));
     }
+    location.reload();
   };
   req.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
   const requestBody = JSON.stringify(data);
@@ -30,8 +31,9 @@ const requestGet = function (url, callBack) {
   req.open('GET', url);
   req.onload = function () {
     if (isValidResponse(this)) {
-      callBack(JSON.parse(this.responseText));
+      return callBack(JSON.parse(this.responseText));
     }
+    location.reload();
   };
   req.send();
 };
