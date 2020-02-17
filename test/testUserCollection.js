@@ -49,9 +49,9 @@ describe('UserCollection', () => {
     });
   });
 
-  context('addUser()', () => {
+  context('save()', () => {
 
-    it('should add the user in the list of userCollection', () => {
+    it('should writer gets correct path and json', () => {
       const expectedString = JSON.stringify([
         {name: 'Gulshan Kumar', username: 'gulshane', password: '1234'}
       ]);
@@ -94,6 +94,36 @@ describe('UserCollection', () => {
       ];
       const userCollection = UserCollection.load(userList);
       assert.strictEqual(userCollection.verifyUser('gulshane', '1234'), true);
+    });
+  });
+
+  context('getUserFullName()', () => {
+    it('should return full name of user for given username', () => {
+      const userList = [
+        {name: 'Gulshan Kumar', username: 'gulshane', password: '1234'}
+      ];
+      const userCollection = UserCollection.load(userList);
+      const actualName = userCollection.getUserFullName('gulshane');
+
+      assert.strictEqual(actualName, 'Gulshan Kumar');
+    });
+  });
+
+  context('isAvailable()', () => {
+    it('should return true if username is not in the list', () => {
+      const userList = [
+        {name: 'Gulshan Kumar', username: 'gulshane', password: '1234'}
+      ];
+      const userCollection = UserCollection.load(userList);
+      assert.ok(userCollection.isAvailable('john'));
+    });
+
+    it('should return false if username is in the list', () => {
+      const userList = [
+        {name: 'Gulshan Kumar', username: 'gulshane', password: '1234'}
+      ];
+      const userCollection = UserCollection.load(userList);
+      assert.strictEqual(userCollection.isAvailable('gulshane'), false);
     });
   });
 });
