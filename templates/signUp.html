@@ -4,15 +4,19 @@
 <head>
   <title>SignUp</title>
   <link rel="stylesheet" href="css/form.css">
+  <script src="js/webRequests.js"></script>
+  <script src="js/signUp.js"></script>
 </head>
 
 <body>
   <div class="page">
     <h2>Create an Account</h2>
+    <p class="message">__message__</p>
     <form class="form" action="signUp" method="POST">
       <input type="text" name="name" placeholder="Full Name" required>
       <br>
-      <input type="text" name="username" placeholder="User Name" required>
+      <input type="text" name="username" placeholder="User Name"
+        onkeyup="checkUsername()" required>
       <br>
       <input type="password" name="password" placeholder="Password" required>
       <br>
