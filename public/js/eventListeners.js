@@ -107,6 +107,9 @@ const deleteTask = function () {
 const addTask = function () {
   if (event.key === 'Enter') {
     const text = event.target.value;
+    if (text === '') {
+      return;
+    }
     event.target.value = '';
     const toDoListElement = event.target.parentElement.parentElement;
     const toDoListId = toDoListElement.id;
@@ -127,6 +130,9 @@ const deleteToDoList = function () {
 const addToDoList = function () {
   const titleContainer = document.querySelector('#new-title');
   const title = titleContainer.value;
+  if (title === '') {
+    return;
+  }
   requestPost('/addToDoList', {title}, function (toDoList) {
     prependToDoList(toDoList);
     titleContainer.value = '';
