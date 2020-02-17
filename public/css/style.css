@@ -8,6 +8,7 @@ body {
   border-radius: 4px;
   width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -15,6 +16,12 @@ body {
   margin-left: 1vw;
   font-weight: 400;
   font-size: 5vh;
+}
+
+.user-name{
+  margin-right: 1vw;
+  font-weight: 400;
+  font-size: 3vh;
 }
 
 .sub-header {
