@@ -23,7 +23,7 @@ const filterTask = function () {
   );
 
   cardElements.forEach((cardElement) => {
-    if (isTaskAvailable(cardElement, searchTask)) {
+    if (isTaskAvailable(cardElement, searchTask) || isEmpty(searchTask)) {
       cardElement.classList.remove('hide');
 
       const tasksElements = Array.from(
