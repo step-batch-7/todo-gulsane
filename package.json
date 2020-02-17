@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "export DATA_STORE=$(pwd)/test/resources/toDoLists.json; export USER_STORE=$(pwd)/test/resources/userList.json;nyc mocha;",
+    "test": "touch $(pwd)/test/resources/toDoLists.json; export DATA_STORE=$(pwd)/test/resources/toDoLists.json; export USER_STORE=$(pwd)/test/resources/userList.json;nyc mocha;",
     "start": "touch $(pwd)/data/toDoLists.json;export DATA_STORE=$(pwd)/data/toDoLists.json; export USER_STORE=$(pwd)/data/userList.json; node server.js"
   },
   "repository": {
