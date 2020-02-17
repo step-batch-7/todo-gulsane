@@ -18,10 +18,27 @@ body {
   font-size: 5vh;
 }
 
-.user-name{
+.user-info{
   margin-right: 1vw;
+  height: 100%;
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-name{
   font-weight: 400;
   font-size: 3vh;
+}
+
+.logout-link{
+  margin-left: 1vw;
+  height: 80%;
+}
+
+.logout-link img{
+  height: 100%;
 }
 
 .sub-header {
