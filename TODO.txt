@@ -60,3 +60,12 @@ version[1]
 * Add checking mechanism whether desired request body is coming or not
 --DONE-- * Change to express
 
+password encrypted
+--Done--Add name
+--Done--Wrong Info Message
+--Done--Logout
+css for login/signUp
+verification
+refactor handlers
+tests
+searching on data
