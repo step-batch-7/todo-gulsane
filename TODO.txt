@@ -60,6 +60,3 @@ version[1]
 * Add checking mechanism whether desired request body is coming or not
 --DONE-- * Change to express
 
-* Add save method in ToDoListCollection
-* Change writeDataFile function to toDoListCollectionWriter
-  which takes the data and write it to the data file
