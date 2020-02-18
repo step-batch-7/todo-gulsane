@@ -147,6 +147,14 @@ describe('POST', () => {
         .expect('Content-Type', /application\/json/)
         .expect('{"isAvailable":false}');
     });
+
+    it('should return bad request if username field is not given', (done) => {
+      req(app)
+        .post('/checkUsername')
+        .set('Content-Type', 'application/json')
+        .send('{"usernames":"john"}')
+        .expect(400, done);
+    });
   });
 
   context('/signup', () => {
@@ -200,6 +208,15 @@ describe('POST', () => {
         .expect('Content-Type', 'application/json; charset=utf-8')
         .expect('{"id":"tl-2","title":"Class Work","tasks":[]}');
     });
+
+    it('should return bad request if title field is not given', (done) => {
+      req(app)
+        .post('/addToDoList')
+        .set('Cookie', 'SID=1234')
+        .set('Content-Type', 'application/json')
+        .send('{"tt":"Home Work"}')
+        .expect(400, done);
+    });
   });
 
   context('deleteToDoList', () => {
@@ -210,6 +227,15 @@ describe('POST', () => {
         .set('Content-Type', 'application/json')
         .send('{"toDoListId":"tl-1"}')
         .expect(200, done);
+    });
+
+    it('should return bad request if toDoListId field is not given', (done) => {
+      req(app)
+        .post('/deleteToDoList')
+        .set('Cookie', 'SID=1234')
+        .set('Content-Type', 'application/json')
+        .send('{"tt":"tl-1"}')
+        .expect(400, done);
     });
   });
 
@@ -223,6 +249,15 @@ describe('POST', () => {
         .expect(200, done)
         .expect('{"id":"task-2","text":"English","hasDone":false}');
     });
+
+    it('should return bad request if any of required fields is not given', (done) => {
+      req(app)
+        .post('/addTask')
+        .set('Content-Type', 'application/json')
+        .set('Cookie', 'SID=1234')
+        .send('{"toDoListsId":"tl-1","texts":"English"}')
+        .expect(400, done);
+    });
   });
 
   context('deleteTask', () => {
@@ -233,6 +268,15 @@ describe('POST', () => {
         .set('Content-Type', 'application/json')
         .send('{"toDoListId":"tl-1","taskId":"task-1"}')
         .expect(200, done);
+    });
+
+    it('should return bad request if any of required fields is not given', (done) => {
+      req(app)
+        .post('/deleteTask')
+        .set('Content-Type', 'application/json')
+        .set('Cookie', 'SID=1234')
+        .send('{"toDoListsId":"tl-1","taskId":"task-1"}')
+        .expect(400, done);
     });
   });
 
@@ -245,6 +289,15 @@ describe('POST', () => {
         .send('{"toDoListId":"tl-1","taskId":"task-1"}')
         .expect(200, done);
     });
+
+    it('should return bad request if any of required fields is not given', (done) => {
+      req(app)
+        .post('/toggleTaskStatus')
+        .set('Content-Type', 'application/json')
+        .set('Cookie', 'SID=1234')
+        .send('{"toDoListId":"tl-1","tasksId":"task-1"}')
+        .expect(400, done);
+    });
   });
 
   context('changeToDoListTitle', () => {
@@ -256,6 +309,15 @@ describe('POST', () => {
         .send('{"toDoListId":"tl-1","newTitle":"Assignment"}')
         .expect(200, done);
     });
+
+    it('should return bad request if any of required fields is not given', (done) => {
+      req(app)
+        .post('/changeToDoListTitle')
+        .set('Content-Type', 'application/json')
+        .set('Cookie', 'SID=1234')
+        .send('{"toDoListId":"tl-1","title":"Assignment"}')
+        .expect(400, done);
+    });
   });
 
   context('changeTaskText', () => {
@@ -266,6 +328,15 @@ describe('POST', () => {
         .set('Content-Type', 'application/json')
         .send('{"toDoListId":"tl-1","taskId":"task-1","newText":"Assignment"}')
         .expect(200, done);
+    });
+
+    it('should return bad request if any of required fields is not given', (done) => {
+      req(app)
+        .post('/changeTaskText')
+        .set('Content-Type', 'application/json')
+        .set('Cookie', 'SID=1234')
+        .send('{"toDoListId":"tl-1","taskId":"task-1","text":"Assignment"}')
+        .expect(400, done);
     });
   });
 });
