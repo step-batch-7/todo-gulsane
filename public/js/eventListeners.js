@@ -44,10 +44,10 @@ const filterTask = function () {
   });
 };
 
-const resetTitleSearchBar = function () {
-  const searchTitleElement = document.querySelector('#search-title');
-  searchTitleElement.value = '';
-  filterTitle();
+const resetTaskSearchBar = function () {
+  const searchTaskElement = document.querySelector('#search-task');
+  searchTaskElement.value = '';
+  filterTask();
 };
 
 const filterTitle = function () {
@@ -63,6 +63,12 @@ const filterTitle = function () {
     }
     element.parentElement.parentElement.classList.remove('hide');
   });
+};
+
+const resetTitleSearchBar = function () {
+  const searchTitleElement = document.querySelector('#search-title');
+  searchTitleElement.value = '';
+  filterTitle();
 };
 
 const changeTaskText = function () {
