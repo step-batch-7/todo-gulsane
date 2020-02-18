@@ -80,9 +80,10 @@ body {
 
 .search-bars > input{
   height: 80%;
-  width: 10vw;
+  width: 12vw;
   outline: none;
   font-size: 2vh;
+  border-radius: 5px;
 }
 
 .todo-lists-container {
