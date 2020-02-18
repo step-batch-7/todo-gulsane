@@ -17,7 +17,7 @@ body{
 }
 
 .form{
-  margin: 0 auto 10% auto;
+  margin: 0 auto 20% auto;
   width: 80%;
 }
 
@@ -33,17 +33,22 @@ body{
 }
 
 .form button{
-  margin-top: 2vh;
+  margin-top: 3vh;
   border-radius: 5px;
   font-size: 2vh;
   height: 4vh;
   width: 10vw;
   cursor: pointer;
 }
+
 .form button:hover{
   background-color: rgba(156, 153, 153,0.1);
 }
 
 .message{
   color: red;
+}
+
+.page a{
+  margin-top: 10vh;
 }
