@@ -2,11 +2,27 @@ body{
   font-family: sans-serif;
 }
 
+.top-header {
+  border: 1px solid black;
+  height: 7vh;
+  border-radius: 4px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-heading {
+  margin-left: 1vw;
+  font-weight: 400;
+  font-size: 5vh;
+}
+
 .page{
   border: 1px solid rgba(82, 80, 80,0.5);
   border-radius: 5px;
   height: 55vh;
-  margin:10% auto;
+  margin:5% auto;
   width: 23%;
   text-align: center;
   padding: 10px;
