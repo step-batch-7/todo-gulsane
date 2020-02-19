@@ -21,7 +21,7 @@ body{
 .page{
   border: 1px solid rgba(82, 80, 80,0.5);
   border-radius: 5px;
-  height: 55vh;
+  height: 60vh;
   margin:5% auto;
   width: 23%;
   text-align: center;
@@ -63,6 +63,8 @@ body{
 
 .message{
   color: red;
+  border: 0px solid transparent;
+  height: 3vh;
 }
 
 .page a{
