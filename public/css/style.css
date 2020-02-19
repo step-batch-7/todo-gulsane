@@ -98,8 +98,8 @@ body {
 .todo-list-card {
   border: 1px solid black;
   border-radius: 2%;
-  height: 60vh;
-  width: 25vw;
+  height: 50vh;
+  width: 20vw;
   margin: 2vh;
   display: flex;
   flex-direction: column;
